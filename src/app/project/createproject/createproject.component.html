@@ -1,0 +1,15 @@
+<form [formGroup]="formModel" (ngSubmit)=onSubmit()>
+  <h3 mat-dialog-title>{{title}}</h3>
+  <div mat-dialog-content>
+    <mat-form-field class="full-width">
+      <input type="text" matInput placeholder="project name" formControlName="name" required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input type="text" matInput placeholder="project desc" formControlName="desc">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actins>
+    <button type="button" mat-raised-button color="primary" type="submit" [disabled]="!formModel.valid">save</button>
+    <button type="button" mat-dialog-close mat-button>close</button>
+  </div>
+</form>

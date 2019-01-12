@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  border-bottom: rgba(187, 170, 164, 1.0);
+}
+
+.header-items {
+  flex: 1;
+}
+
+.header-item {
+  text-align: end;
+}

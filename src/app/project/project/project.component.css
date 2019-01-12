@@ -1,0 +1,11 @@
+a {
+  color: inherit;
+}
+
+.project-card {
+  height: 100%;
+}
+
+.project-content {
+  height: 10%;
+}

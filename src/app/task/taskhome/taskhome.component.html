@@ -1,0 +1,21 @@
+<mat-toolbar *ngIf="lists?.length===0">
+  <span>You have not got any tasklist, please add.</span>
+</mat-toolbar>
+<div class="task-container">
+  <app-tasklist class="list" *ngFor="let list of lists">
+    <app-taskheader [header]="list.name" (newTask)="openCreateTaskDialog(list.id)" (moveTaskList)="openMoveTaskListDialog()"
+      (editTaskList)="openEditTaskListDialog(list)" (deleteTaskList)="openDeleteTaskListDialog(list)">
+    </app-taskheader>
+    <app-quicktask (quicktask)="createQuickTask($event,list.id)"></app-quicktask>
+    <app-taskitem [listId]="list.id" [newTask]="newTask" [updatedTask]="updatedTask" (editTask)="openEditTaskDialog($event)"
+      (taskStatus)="toggleTaskStatus($event)">
+    </app-taskitem>
+  </app-tasklist>
+</div>
+
+<button mat-fab type="button" (click)="openCreateTaskListDialog()" class="addButton">
+  <mat-icon>add</mat-icon>
+</button>
+<button mat-fab type="button" (click)="backToProjects()" class="backButton">
+  <mat-icon>arrow_back</mat-icon>
+</button>

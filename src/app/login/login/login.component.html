@@ -1,0 +1,20 @@
+<form class="login-form">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <input matInput type="text" placeholder="Enter email">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput type="password" placeholder="Enter password">
+      </mat-form-field>
+      <button mat-raised-button>Login</button>
+    </mat-card-content>
+    <mat-card-actions>
+      <p><a [routerLink]="['/register']">registered</a></p>
+      <p><a href="#">forget password?</a></p>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -1,0 +1,8 @@
+<mat-list-item *ngFor="let task of tasks" (click)="onClick(task)">
+  <mat-checkbox class="checkbox" (click)="onClickCheckbox($event)" [checked]="task.completed" (change)="toggleTaskStatus(task)">
+  </mat-checkbox>
+  <div class="content">
+    <div class="desc" [class.isCompleted]="task.completed" matTooltip="{{task.desc}}">{{task.desc}}</div>
+    <span [class.isCompleted]="task.completed">{{task.startDate | date: "MM-dd-yy"}}</span>
+  </div>
+</mat-list-item>

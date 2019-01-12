@@ -1,0 +1,12 @@
+<form>
+  <h3 mat-dialog-title>{{title}}</h3>
+  <div mat-dialog-contnt>
+    <mat-form-field>
+      <input matInput placeholder="Enter tasklist name" [(ngModel)]="taskListName" name="taskListName" required>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onClick()">save</button>
+    <button mat-button mat-dialog-close>close</button>
+  </div>
+</form>

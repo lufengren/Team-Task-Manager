@@ -1,0 +1,30 @@
+.task-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 2rem auto;
+  height: 75vh;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.list {
+  width: 30%;
+  margin: 0 1%;
+  overflow-x: hidden;
+  background: white;
+}
+
+.addButton {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  z-index: 999;
+}
+
+.backButton {
+  position: fixed;
+  left: 32px;
+  bottom: 32px;
+  z-index: 999;
+}

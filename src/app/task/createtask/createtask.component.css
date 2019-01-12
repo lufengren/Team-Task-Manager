@@ -1,0 +1,21 @@
+.radio-button {
+  margin-right: 1rem;
+}
+
+.date-picker {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.date-item {
+  flex: 1;
+  padding-right: 1rem;
+}
+
+.description {
+  margin-bottom: 2rem;
+}
+
+.priority {
+  margin-bottom: 2rem;
+}
