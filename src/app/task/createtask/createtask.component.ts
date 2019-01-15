@@ -52,7 +52,6 @@ export class CreatetaskComponent implements OnInit {
     }
   }
   onSubmit() {
-    console.log(this.formModel.value);
     this.dialogRef.close(this.formModel.value);
   }
 }

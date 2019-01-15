@@ -4,46 +4,41 @@
     {
       "name": "Casting Calls",
       "desc": "select people (fictional, famous, or otherwise) to play the role in a movie version of story or historic event.",
-      "coverImg": "../../../assets/img/project/3.jpeg",
+      "coverImg": "3.jpeg",
       "id": 9
     },
     {
       "name": "Book Clubs",
       "desc": "Students read either novels or selections from the text book and discuss the readings in small groups. ",
-      "coverImg": "../../../assets/img/project/5.jpeg",
+      "coverImg": "5.jpeg",
       "id": 3
     },
     {
       "name": "Blueprints",
       "desc": "create blueprints or floor plans of a scene described in a novel, an historic setting, or an earthquake proof bridge or structure.",
-      "coverImg": "../../../assets/img/project/2.jpeg",
+      "coverImg": "2.jpeg",
       "id": 1
     },
     {
       "name": "Album Covers",
       "desc": "Album can be connected to a skill and demonstrate how that skill is used.",
-      "coverImg": "../../../assets/img/project/5.jpeg",
+      "coverImg": "5.jpeg",
       "id": 2
     },
     {
       "name": "DriveWorks",
       "desc": "With DriveWorks Live you have the ability to include a custom image for each project, an alias for each project name and a description for each project.",
-      "coverImg": "../../../assets/img/project/8.jpeg",
+      "coverImg": "8.jpeg",
       "id": 4
     },
     {
       "name": "Task Manager",
       "desc": "share your project plans with anyone in needs",
-      "coverImg": "../../../assets/img/project/1.jpeg",
+      "coverImg": "1.jpeg",
       "id": 7
     }
   ],
   "tasklists": [
-    {
-      "name": "Working on",
-      "projectId": "2",
-      "id": 1
-    },
     {
       "name": "tasklist1",
       "projectId": "1",
@@ -83,64 +78,14 @@
       "name": "User Module",
       "projectId": "7",
       "id": 11
+    },
+    {
+      "name": "Working on",
+      "projectId": "2",
+      "id": 12
     }
   ],
   "tasks": [
-    {
-      "desc": "task1gjkljkljkjj;k",
-      "priority": 3,
-      "startDate": "2019-01-28T08:00:00.000Z",
-      "endDate": "2019-01-27T08:00:00.000Z",
-      "taskListId": 1,
-      "id": 1,
-      "completed": false
-    },
-    {
-      "desc": "task2ccc",
-      "priority": 1,
-      "startDate": "",
-      "endDate": "",
-      "taskListId": 1,
-      "id": 2,
-      "completed": false
-    },
-    {
-      "desc": "task3",
-      "priority": 1,
-      "startDate": "2019-01-14T08:00:00.000Z",
-      "endDate": "2019-01-29T08:00:00.000Z",
-      "taskListId": 1,
-      "id": 3,
-      "completed": false
-    },
-    {
-      "desc": "ggggryrtyetertebnbvnvcb",
-      "priority": 1,
-      "startDate": "",
-      "endDate": "",
-      "taskListId": 1,
-      "id": 4,
-      "completed": false
-    },
-    {
-      "desc": "ffghjfghfghfghghgdhdfh",
-      "taskListId": 1,
-      "completed": true,
-      "priority": 3,
-      "createDate": "2019-01-11T01:55:04.697Z",
-      "id": 9,
-      "startDate": null,
-      "endDate": "2019-01-21T08:00:00.000Z"
-    },
-    {
-      "desc": "task3",
-      "priority": 2,
-      "startDate": "2019-01-16T08:00:00.000Z",
-      "endDate": "2019-01-14T08:00:00.000Z",
-      "taskListId": 1,
-      "id": 12,
-      "completed": false
-    },
     {
       "desc": "change the website appearance and page behavior by choosing pre-loaded",
       "priority": 3,
@@ -268,6 +213,14 @@
       "taskListId": 11,
       "id": 27,
       "completed": false
+    },
+    {
+      "desc": "Login Module",
+      "priority": 1,
+      "startDate": "",
+      "endDate": "",
+      "taskListId": 12,
+      "id": 28
     }
   ]
 }

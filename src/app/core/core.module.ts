@@ -38,6 +38,7 @@ import 'hammerjs';
     {
       provide: 'BASE_CONFIG', useValue: {
         uri: 'https://lucialu.azurewebsites.net'
+        // uri: 'http://localhost:3000'
       }
     }
   ]

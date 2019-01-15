@@ -13,6 +13,7 @@ export class ProjectComponent implements OnInit {
   @Output() onedit = new EventEmitter<void>();
   @Output() ondelete = new EventEmitter<void>();
   @Output() onview = new EventEmitter<void>();
+  imgUrl: string;
 
   @HostBinding('@card') cardState = 'original';
   @HostListener('mouseenter')
@@ -27,6 +28,7 @@ export class ProjectComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.imgUrl = `assets/img/project/${this.project.coverImg}`;
   }
   onInvite() {
     this.oninvite.emit(this.project);
