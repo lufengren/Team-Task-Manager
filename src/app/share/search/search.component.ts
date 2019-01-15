@@ -11,7 +11,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 export class SearchComponent implements OnInit {
   private keyword;
   @Output() emitKeyword = new EventEmitter();
-  private searchTerm: FormControl = new FormControl();
+  searchTerm: FormControl = new FormControl();
   constructor() { }
 
   ngOnInit() {

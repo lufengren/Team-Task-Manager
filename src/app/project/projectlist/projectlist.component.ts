@@ -3,7 +3,6 @@ import { routerAni } from '../../animations/router';
 import { ActivatedRoute } from '@angular/router';
 
 import { CreateprojectComponent } from '../createproject/createproject.component';
-import { InvitememberComponent } from '../invitemember/invitemember.component';
 import { DeleteDialogComponent } from '../../share/delete-dialog/delete-dialog.component';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { AuthService } from '../../service/Auth.service';
+
 
 @Component({
   selector: 'app-register',
@@ -10,7 +10,7 @@ import { AuthService } from '../../service/Auth.service';
 export class RegisterComponent implements OnInit {
   // items: string[];
   registerForm: FormGroup;
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder) { }
   ngOnInit() {
     // const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
     // this.items = nums.map(item => `avatars:svg-${item}`);
@@ -37,6 +37,5 @@ export class RegisterComponent implements OnInit {
       email: this.registerForm.value.email,
       password: this.registerForm.value.passwordGroup.password
     };
-    this.authService.register(registerInfo).subscribe()
   }
 }

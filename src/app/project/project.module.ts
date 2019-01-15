@@ -4,7 +4,7 @@ import { ShareModule } from '../share/share.module';
 import { ProjectlistComponent } from './projectlist/projectlist.component';
 import { CreateprojectComponent } from './createproject/createproject.component';
 import { ProjectComponent } from './project/project.component';
-import { InvitememberComponent } from './invitemember/invitemember.component';
+// import { InvitememberComponent } from './invitemember/invitemember.component';
 
 import { ProjectRoutingModule } from './project_routing.module';
 
@@ -13,17 +13,14 @@ import { ProjectRoutingModule } from './project_routing.module';
   declarations: [
     ProjectlistComponent,
     CreateprojectComponent,
-    ProjectComponent,
-    InvitememberComponent
-
+    ProjectComponent
   ],
   imports: [
     ShareModule,
     ProjectRoutingModule
   ],
   entryComponents: [
-    CreateprojectComponent,
-    InvitememberComponent
+    CreateprojectComponent
   ],
   exports: [
     ProjectlistComponent
