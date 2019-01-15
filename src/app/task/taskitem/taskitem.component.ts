@@ -12,6 +12,7 @@ export class TaskitemComponent implements OnInit, OnChanges {
   @Input() updatedTask;
   @Output() editTask = new EventEmitter();
   @Output() taskStatus = new EventEmitter();
+  @Output() numberOfTasks = new EventEmitter();
   tasks;
   isCompleted: boolean;
   constructor(private service$: TaskService) { }
@@ -23,7 +24,10 @@ export class TaskitemComponent implements OnInit, OnChanges {
     this.getTasks();
   }
   getTasks() {
-    this.service$.getByListId(this.listId).subscribe(tasks => this.tasks = tasks.reverse());
+    this.service$.getByListId(this.listId).subscribe(tasks => {
+      this.tasks = tasks.reverse();
+      this.numberOfTasks.emit(this.tasks.length);
+    });
   }
   onClick(task) {
     this.editTask.emit(task);

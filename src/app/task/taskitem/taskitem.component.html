@@ -1,8 +1,15 @@
-<mat-list-item *ngFor="let task of tasks" (click)="onClick(task)">
-  <mat-checkbox class="checkbox" (click)="onClickCheckbox($event)" [checked]="task.completed" (change)="toggleTaskStatus(task)">
+<mat-list-item *ngFor="let task of tasks" (click)="onClick(task)" class="list-item">
+  <mat-checkbox class="checkbox" color="primary" (click)="onClickCheckbox($event)" [checked]="task.completed" (change)="toggleTaskStatus(task)">
   </mat-checkbox>
   <div class="content">
     <div class="desc" [class.isCompleted]="task.completed" matTooltip="{{task.desc}}">{{task.desc}}</div>
-    <span [class.isCompleted]="task.completed">{{task.startDate | date: "MM-dd-yy"}}</span>
+    <div class="extra-content">
+      <div class="due-date">
+        <mat-icon>alarm</mat-icon>
+        <span [class.isCompleted]="task.completed">{{task.endDate | date: "MM-dd-yy"}}</span>
+      </div>
+      <div [ngClass]="{'high-priority':task.priority===1,'mid-priority':task.priority===2,'low-priority':task.priority===3}"
+        class="priority"></div>
+    </div>
   </div>
 </mat-list-item>

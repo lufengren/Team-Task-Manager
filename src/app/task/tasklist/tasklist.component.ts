@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tasklist.component.css']
 })
 export class TasklistComponent implements OnInit {
-
+  numberOfTasks;
   constructor() { }
 
   ngOnInit() {
   }
-
+  passNumberOfTasks(num) {
+    console.log(num);
+    this.numberOfTasks = num;
+  }
 }

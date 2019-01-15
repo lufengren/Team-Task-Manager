@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, mergeMap } from 'rxjs/operators';
 
 import { CreatetaskComponent } from '../createtask/createtask.component';
 import { MovetasklistComponent } from '../movetasklist/movetasklist.component';
@@ -20,8 +20,9 @@ import { taskItemAni } from 'src/app/animations/taskitem';
   styleUrls: ['./taskhome.component.css']
 })
 export class TaskhomeComponent implements OnInit {
-  lists;
-  projectId;
+  lists = [];
+  projectId: string;
+  currentProject;
   newTask;
   updatedTask;
   @Output() activeTaskItem = new EventEmitter();
@@ -35,15 +36,17 @@ export class TaskhomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.activatedRoute.paramMap.pipe(
-      switchMap(
-        params => {
-          this.projectId = params.get('id');
-          return this.tasklistService$.getByProjectId(this.projectId);
-        })
-    ).subscribe(tasklists => this.lists = tasklists);
-    // const projectId = this.activatedRoute.snapshot.paramMap.get('id');
-    // this.lists$ = this.service$.get(projectId);
+    // this.activatedRoute.paramMap.pipe(
+    //   switchMap(
+    //     params => {
+    //       this.projectId = params.get('id');
+    //       return this.tasklistService$.getByProjectId(this.projectId);
+    //     })
+    // ).subscribe(tasklists => this.lists = tasklists.reverse());
+    // this.projectService$.get().subscribe();
+    this.projectId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.tasklistService$.getByProjectId(this.projectId).subscribe(tasklists => this.lists = tasklists.reverse());
+    this.projectService$.getById(this.projectId).subscribe(project => this.currentProject = project);
   }
 
   openCreateTaskDialog(tasklistId) {
@@ -91,19 +94,24 @@ export class TaskhomeComponent implements OnInit {
   openEditTaskListDialog(list) {
     const dialogRef = this.dialog.open(CreatetasklistComponent, { data: { tasklist: list } });
     dialogRef.afterClosed().subscribe(
-      updatedname => this.tasklistService$.update({ name: updatedname }, list.id, this.projectId).subscribe(
-        (updatedTasklist) => {
-          const index = this.lists.map(item => item.id).indexOf(updatedTasklist.id);
-          this.lists = [...this.lists.slice(0, index), updatedTasklist, ...this.lists.slice(index + 1)];
+      updatedname => {
+        if (updatedname) {
+          this.tasklistService$.update({ name: updatedname }, list.id, this.projectId).subscribe(
+            (updatedTasklist) => {
+              const index = this.lists.map(item => item.id).indexOf(updatedTasklist.id);
+              this.lists = [...this.lists.slice(0, index), updatedTasklist, ...this.lists.slice(index + 1)];
+            }
+          );
         }
-      )
-    );
+      });
   }
+
+
   openDeleteTaskListDialog(list) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: {
-        title: 'Delete tasklist',
-        content: 'delete tasklist will delete all taskitems under it'
+        title: 'Delete Tasklist',
+        content: 'Delete tasklist will delete all taskitems under it'
       }
     });
     dialogRef.afterClosed().subscribe(res => {
@@ -129,9 +137,11 @@ export class TaskhomeComponent implements OnInit {
       this.newTask = task;
     });
   }
+
   backToProjects() {
     this.router.navigate(['/projects', { id: this.projectId }]);
   }
+
   // openMoveTaskListDialog() {
   //   this.dialog.open(MovetasklistComponent, { data: { lists: this.lists } });
   // }
