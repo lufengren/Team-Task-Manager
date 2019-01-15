@@ -27,7 +27,7 @@ export class CreateprojectComponent implements OnInit {
       this.formModel = this.fb.group({
         name: ['', Validators.required],
         desc: [],
-        coverImg: `../../../assets/img/project/${Math.floor((Math.random() * 10))}.jpeg`
+        coverImg: `./assets/img/project/${Math.floor((Math.random() * 10))}.jpeg`
       });
       this.title = 'Create Project';
     }
