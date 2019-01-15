@@ -1,26 +1,25 @@
 <div mat-subheader class="header">
   <div class="header-items">
-    <h3>{{header}}</h3>
+    <h3 matBadge={{number}} matBadgeOverlap="false">{{header}}</h3>
   </div>
   <div class="header-items header-item">
     <button mat-icon-button (click)="openCreateTaskDialog()">
-      <mat-icon>add_circle_outline</mat-icon>
+      <mat-icon>add_circle</mat-icon>new
     </button>
-    <span>new</span>
   </div>
   <div class="header-items header-item">
     <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>keyboard_arrow_down</mat-icon>
+      <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="openEditTaskListDialog()">
         <mat-icon>mode_edit</mat-icon>
         <span>edit tasklist name</span>
       </button>
-      <button mat-menu-item (click)="openMoveTaskListDialog()">
-        <mat-icon>mode_edit</mat-icon>
+      <!-- <button mat-menu-item (click)="openMoveTaskListDialog()">
+        <mat-icon>clear_all</mat-icon>
         <span>move all taskitems</span>
-      </button>
+      </button> -->
       <button mat-menu-item (click)="openDeleteTaskListDialog()">
         <mat-icon>delete_forever</mat-icon>
         <span>delete tasklist</span>

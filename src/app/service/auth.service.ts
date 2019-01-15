@@ -26,7 +26,7 @@ export class AuthService {
     return this.http.get<Auth>(uri, { params: { 'email': user.email } })
       .pipe(switchMap(
         res => {
-          if (res.length > 0) {
+          if (res) {
             throw 'user existed';
           }
           return this.http.post<Auth>(uri, JSON.stringify(user), { headers: this.headers });

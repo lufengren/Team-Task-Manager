@@ -9,7 +9,7 @@ import { DeleteDialogComponent } from '../../share/delete-dialog/delete-dialog.c
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { ProjectService } from 'src/app/service/project.service';
-import { concatMap } from 'rxjs/operators';
+import { switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 
 @Component({
@@ -64,7 +64,7 @@ export class ProjectlistComponent implements OnInit {
 
   openDeleteProjectDialog(project) {
     const dialogRef = this.dialog.open(DeleteDialogComponent,
-      { data: { title: 'Delete project', content: 'delete this project will delete all tasklists and tasks under it' } });
+      { data: { title: 'Delete Project', content: 'Delete this project will delete all tasklists and tasks under it' } });
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.service$.delete(project).subscribe(() => this.projects = this.projects.filter(item => item.id !== project.id));
@@ -72,4 +72,10 @@ export class ProjectlistComponent implements OnInit {
     });
   }
 
+  searchProduct(value$) {
+    value$.pipe(debounceTime(300), distinctUntilChanged(), switchMap(term => this.service$.search(term)))
+      .subscribe(res => {
+        this.projects = res;
+      });
+  }
 }

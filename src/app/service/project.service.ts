@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Project, Tasklist } from '../domain';
-import { Observable, from } from 'rxjs';
-import { mergeMap, switchMap } from 'rxjs/operators';
+import { Observable, from, of } from 'rxjs';
+import { mergeMap, switchMap, concatMap } from 'rxjs/operators';
 import { TasklistService } from './tasklist.service';
 
 @Injectable({
@@ -32,12 +32,23 @@ export class ProjectService {
 
   update(updateInfo, id): Observable<Project> {
     const uri = `${this.config.uri}/${this.domain}/${id}`;
-    return this.http.get<Project[]>(`${this.config.uri}/${this.domain}`, { params: { 'name': updateInfo.name } })
-      .pipe(switchMap(res => {
-        if (res.length !== 0) {
-          throw 'project exist';
+    return this.http.get<Project>(uri)
+      .pipe(concatMap(project => {
+        if (project.name === updateInfo.name) {
+          if (project.desc === updateInfo.desc) {
+            throw "no changes";
+          } else {
+            return this.http.patch<Project>(uri, JSON.stringify(updateInfo), { headers: this.headers });
+          }
         } else {
-          return this.http.patch<Project>(uri, JSON.stringify(updateInfo), { headers: this.headers });
+          return this.http.get<Project[]>(`${this.config.uri}/${this.domain}`, { params: { 'name': updateInfo.name } })
+            .pipe(switchMap(res => {
+              if (res.length !== 0) {
+                throw "project exists"
+              } else {
+                return this.http.patch<Project>(uri, JSON.stringify(updateInfo), { headers: this.headers });
+              }
+            }));
         }
       }));
   }
@@ -54,8 +65,15 @@ export class ProjectService {
     return this.http.get<Project[]>(uri);
   }
 
-  // getById(id): Observable<Project> {
-  //   const uri = `${this.config.uri}/${this.domain}/${id}`;
-  //   return this.http.get<Project>(uri);
-  // }
+  search(term): Observable<Project[]> {
+    const uri = `${this.config.uri}/${this.domain}/?name_like=${term}`;
+    if (!term.trim()) {
+      return this.http.get<Project[]>(`${this.config.uri}/${this.domain}`);
+    }
+    return this.http.get<Project[]>(uri);
+  }
+  getById(projectId): Observable<Project> {
+    const uri = `${this.config.uri}/${this.domain}/${projectId}`;
+    return this.http.get<Project>(uri);
+  }
 }

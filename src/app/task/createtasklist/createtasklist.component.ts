@@ -21,6 +21,6 @@ export class CreatetasklistComponent implements OnInit {
     if (!this.taskListName || this.taskListName.length === 0 || !this.taskListName.trim()) {
       return;
     }
-    this.dialogRef.close(this.taskListName);
+    this.dialogRef.close(this.taskListName.trim());
   }
 }

@@ -5,9 +5,13 @@
         {{project.name}}
       </mat-card-title>
     </mat-card-header>
-    <img mat-card-img alt="project img" [src]="project.coverImg">
-    <mat-card-content class="project-content">
-      {{project.desc}}
+    <div class="img">
+      <img mat-card-img alt="project img" [src]="project.coverImg">
+    </div>
+    <mat-card-content class="project-description">
+      <span>
+        {{project.desc}}
+      </span>
     </mat-card-content>
   </a>
   <mat-card-actions>

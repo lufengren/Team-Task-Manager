@@ -3,9 +3,24 @@ a {
 }
 
 .project-card {
-  height: 100%;
+  box-sizing: border-box;
+  height: 370px;
 }
 
-.project-content {
-  height: 10%;
+img {
+  width: 100%;
+}
+
+.project-description {
+  box-sizing: border-box;
+  height: 11%;
+  margin-bottom: 0;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+
+mat-card-header {
+  box-sizing: border-box;
+  overflow: hidden;
 }

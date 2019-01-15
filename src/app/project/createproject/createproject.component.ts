@@ -20,22 +20,28 @@ export class CreateprojectComponent implements OnInit {
       this.formModel = this.fb.group({
         name: [this.data.project.name, Validators.required],
         desc: [this.data.project.desc],
+        coverImg: [this.data.project.coverImg]
       });
-      this.title = 'Edit project';
+      this.title = 'Edit Project';
     } else {
       this.formModel = this.fb.group({
         name: ['', Validators.required],
         desc: [],
         coverImg: `../../../assets/img/project/${Math.floor((Math.random() * 10))}.jpeg`
       });
-      this.title = 'Create project';
+      this.title = 'Create Project';
     }
   }
   onSubmit() {
-    if (!this.formModel.valid) {
+    if (!this.formModel.valid || !this.formModel.value.name.trim()) {
       return;
     }
-    const newProject = this.formModel.value;
+    const newProject = {
+      name: this.formModel.value.name.trim(),
+      desc: this.formModel.value.desc.trim(),
+      coverImg: this.formModel.value.coverImg
+    };
+    console.log(newProject);
     this.dialogRef.close(newProject);
   }
 }

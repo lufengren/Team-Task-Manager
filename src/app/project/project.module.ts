@@ -6,7 +6,6 @@ import { CreateprojectComponent } from './createproject/createproject.component'
 import { ProjectComponent } from './project/project.component';
 import { InvitememberComponent } from './invitemember/invitemember.component';
 
-
 import { ProjectRoutingModule } from './project_routing.module';
 
 
@@ -16,6 +15,7 @@ import { ProjectRoutingModule } from './project_routing.module';
     CreateprojectComponent,
     ProjectComponent,
     InvitememberComponent
+
   ],
   imports: [
     ShareModule,
