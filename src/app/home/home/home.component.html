@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="stat-data">
+    <div class="data data-one background-set">
+      <div>
+        <div class="secondary-text">Projects</div>
+        <div class="font-size-4 font-weight-300 line-height-1">{{numberOfProjects}}</div>
+      </div>
+      <div>
+        <mat-icon>folder_open</mat-icon>
+      </div>
+    </div>
+    <div class="data data-two background-set">
+      <div>
+        <div class="secondary-text">Task Lists</div>
+        <div class="font-size-4 font-weight-300 line-height-1">{{numberOfTasklists}}</div>
+      </div>
+      <div>
+        <mat-icon>format_list_bulleted</mat-icon>
+      </div>
+    </div>
+    <div class="data background-set">
+      <div>
+        <div class="secondary-text">Tasks</div>
+        <div class="font-size-4 font-weight-300 line-height-1">{{numberOfTasks}}</div>
+      </div>
+      <div>
+        <mat-icon>event_note</mat-icon>
+      </div>
+    </div>
+    <highcharts-chart class="data-chart background-set" [Highcharts]="Highcharts" [options]="taskshare">
+    </highcharts-chart>
+
+  </div>
+
+  <div class="stat-chart">
+
+    <highcharts-chart class="background-set chart" [Highcharts]="Highcharts" [options]="project">
+    </highcharts-chart>
+
+
+    <highcharts-chart class="background-set chart" [Highcharts]="Highcharts" [options]="task">
+    </highcharts-chart>
+
+  </div>
+</div>
