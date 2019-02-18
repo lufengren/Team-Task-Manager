@@ -29,7 +29,7 @@ export class CreateprojectComponent implements OnInit {
         desc: [],
         coverImg: `${Math.floor((Math.random() * 10))}.jpeg`
       });
-      this.title = 'Create Project';
+      this.title = 'Add Project';
     }
   }
   onSubmit() {

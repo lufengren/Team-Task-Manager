@@ -1,1 +1,37 @@
+form {
+  min-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
+mat-dialog-content {
+  flex: 1 1 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.error-msg {
+  color: #F1453D;
+  margin-bottom: 2rem;
+}
+
+/* .mat-dialog-actions {
+  display: flex;
+  justify-content: space-around;
+} */
+
+
+
+
+
+.error-container {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+}

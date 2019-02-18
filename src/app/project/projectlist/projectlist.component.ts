@@ -74,7 +74,7 @@ export class ProjectlistComponent implements OnInit {
   searchProduct(value$) {
     value$.pipe(debounceTime(300), distinctUntilChanged(), switchMap(term => this.service$.search(term)))
       .subscribe(res => {
-        this.projects = res;
+        this.projects = res.reverse();
       });
   }
 }

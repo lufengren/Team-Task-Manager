@@ -1,9 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { switchMap, mergeMap } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
 
-import { CreatetaskComponent } from '../createtask/createtask.component';
-import { MovetasklistComponent } from '../movetasklist/movetasklist.component';
+import { CreatetaskComponent } from '../../share/createtask/createtask.component';
 import { CreatetasklistComponent } from '../createtasklist/createtasklist.component';
 import { DeleteDialogComponent } from '../../share/delete-dialog/delete-dialog.component';
 
@@ -12,7 +10,7 @@ import { TaskService } from '../../service/task.service';
 import { ProjectService } from '../../service/project.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { taskItemAni } from 'src/app/animations/taskitem';
+
 
 @Component({
   selector: 'app-taskhome',
@@ -23,9 +21,11 @@ export class TaskhomeComponent implements OnInit {
   lists = [];
   projectId: string;
   currentProject;
-  newTask;
-  updatedTask;
+  updateTask;
+
+  isHidden = false;
   @Output() activeTaskItem = new EventEmitter();
+
   constructor(
     private dialog: MatDialog,
     private tasklistService$: TasklistService,
@@ -45,28 +45,33 @@ export class TaskhomeComponent implements OnInit {
     // ).subscribe(tasklists => this.lists = tasklists.reverse());
     // this.projectService$.get().subscribe();
     this.projectId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.tasklistService$.getByProjectId(this.projectId).subscribe(tasklists => this.lists = tasklists.reverse());
+    this.tasklistService$.getByProjectId(this.projectId).subscribe(tasklists => {
+      this.lists = tasklists.reverse();
+    });
     this.projectService$.getById(this.projectId).subscribe(project => this.currentProject = project);
   }
-
-  openCreateTaskDialog(tasklistId) {
-    const dialogRef = this.dialog.open(CreatetaskComponent);
-    dialogRef.afterClosed().subscribe(newTask => {
-      if (newTask) {
-        newTask['taskListId'] = tasklistId;
-        this.taskService$.add(newTask, tasklistId).subscribe(task => {
-          this.newTask = task;
-        });
+  openCreateTaskDialog(projectId) {
+    this.tasklistService$.getByProjectId(projectId).subscribe(tasklists => {
+      const dialogRef = this.dialog.open(CreatetaskComponent, { data: { tasklists: this.lists } });
+      dialogRef.afterClosed().subscribe(newTask => {
+        if (newTask) {
+          this.taskService$.add(newTask).subscribe(task => {
+            this.updateTask = task;
+          });
+        }
       }
-    }
-    );
+      );
+    });
   }
   openEditTaskDialog(task) {
-    const dialogRef = this.dialog.open(CreatetaskComponent, { data: { task: task } });
-    dialogRef.afterClosed().subscribe(updatedInfo =>
-      this.taskService$.update(updatedInfo, task.id).subscribe(
-        updatedtask => this.updatedTask = updatedtask
-      )
+    const dialogRef = this.dialog.open(CreatetaskComponent, { data: { task: task, tasklists: this.lists } });
+    dialogRef.afterClosed().subscribe(updatedInfo => {
+      if (updatedInfo) {
+        this.taskService$.update(updatedInfo, task.id).subscribe(
+          updateTask => this.updateTask = updateTask
+        );
+      }
+    }
     );
   }
   toggleTaskStatus(task) {
@@ -74,7 +79,7 @@ export class TaskhomeComponent implements OnInit {
       completed: !task.completed
     };
     this.taskService$.update(updateInfo, task.id).subscribe(
-      updatedtask => this.updatedTask = updatedtask);
+      updatedtask => this.updateTask = updatedtask);
   }
   openCreateTaskListDialog() {
     const dialogRef = this.dialog.open(CreatetasklistComponent);
@@ -105,13 +110,11 @@ export class TaskhomeComponent implements OnInit {
         }
       });
   }
-
-
   openDeleteTaskListDialog(list) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: {
         title: 'Delete Tasklist',
-        content: 'Delete tasklist will delete all taskitems under it'
+        content: `Delete ${list.name} will delete all tasks under it`
       }
     });
     dialogRef.afterClosed().subscribe(res => {
@@ -119,30 +122,14 @@ export class TaskhomeComponent implements OnInit {
         this.tasklistService$.delete(list).subscribe(
           () => {
             this.lists = this.lists.filter(item => item.id !== list.id);
+            this.router.navigate(['/projects', this.projectId, 'tasklists']);
           }
         );
       }
     });
   }
 
-  createQuickTask(desc, id) {
-    const newTask = {
-      desc: desc,
-      taskListId: id,
-      completed: false,
-      priority: 3,
-      createDate: new Date()
-    };
-    this.taskService$.add(newTask, this.projectId).subscribe(task => {
-      this.newTask = task;
-    });
+  showSidebar() {
+    this.isHidden = !this.isHidden;
   }
-
-  backToProjects() {
-    this.router.navigate(['/projects', { id: this.projectId }]);
-  }
-
-  // openMoveTaskListDialog() {
-  //   this.dialog.open(MovetasklistComponent, { data: { lists: this.lists } });
-  // }
 }

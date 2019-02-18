@@ -11,7 +11,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 export class CreatetaskComponent implements OnInit {
   title: string;
   formModel: FormGroup;
-  formInfo;
+  tasklists;
+
   priorities = [
     {
       label: 'high-level',
@@ -33,22 +34,26 @@ export class CreatetaskComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.data) {
+    if (this.data.task) {
       this.formModel = this.fb.group({
         desc: [this.data.task.desc, Validators.required],
+        taskListId: [this.data.task.taskListId, Validators.required],
         priority: [this.data.task.priority, Validators.required],
         startDate: [this.data.task.startDate],
         endDate: [this.data.task.endDate]
       });
       this.title = 'Edit task';
+      this.tasklists = this.data.tasklists;
     } else {
       this.formModel = this.fb.group({
         desc: ['', Validators.required],
+        taskListId: ['', Validators.required],
         priority: ['', Validators.required],
         startDate: [''],
         endDate: ['']
       });
       this.title = 'Create task';
+      this.tasklists = this.data.tasklists;
     }
   }
   onSubmit() {

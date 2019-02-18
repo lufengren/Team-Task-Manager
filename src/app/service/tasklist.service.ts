@@ -59,5 +59,8 @@ export class TasklistService {
       .subscribe(tasks => tasks.forEach(task => this.http.delete(`${this.config.uri}/tasks/${task.id}`).subscribe()));
     return this.http.delete<Tasklist>(uri);
   }
-
+  get(): Observable<Tasklist[]> {
+    const uri = `${this.config.uri}/${this.domain}`;
+    return this.http.get<Tasklist[]>(uri);
+  }
 }

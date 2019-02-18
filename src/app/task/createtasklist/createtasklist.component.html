@@ -2,11 +2,20 @@
   <h3 mat-dialog-title>{{title}}</h3>
   <div mat-dialog-contnt>
     <mat-form-field>
-      <input matInput placeholder="Enter tasklist name" [(ngModel)]="taskListName" name="taskListName" required>
+      <input appNoSpaces matInput placeholder="Enter tasklist name" [(ngModel)]="taskListName" name="taskListName"
+        required #name="ngModel">
     </mat-form-field>
+    <!-- <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-msg">
+      <div [hidden]="!name.errors">
+        Name is required and no whitespace.
+      </div>
+    </div> -->
+    <div *ngIf="name.errors && !name.pristine" class="error-msg">
+      Name is required and no whitespace.
+    </div>
   </div>
   <div mat-dialog-actions>
-    <button mat-raised-button color="primary" (click)="onClick()">save</button>
+    <button mat-raised-button color="primary" (click)="onClick()" [disabled]="!name.valid">save</button>
     <button mat-button mat-dialog-close>close</button>
   </div>
 </form>

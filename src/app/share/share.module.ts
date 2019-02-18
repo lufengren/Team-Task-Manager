@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HighchartsChartModule } from 'highcharts-angular';
+
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { SearchComponent } from './search/search.component';
+import { CreatetaskComponent } from './createtask/createtask.component';
+
+import { NoWhitespaceDirective } from '../directive/no-whitespace.directive';
 
 import {
   MatToolbarModule,
@@ -28,7 +33,12 @@ import {
 
 
 @NgModule({
-  declarations: [DeleteDialogComponent, SearchComponent],
+  declarations: [
+    DeleteDialogComponent,
+    SearchComponent,
+    CreatetaskComponent,
+    NoWhitespaceDirective
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -51,10 +61,12 @@ import {
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
-    MatBadgeModule
+    MatBadgeModule,
+    HighchartsChartModule
   ],
   entryComponents: [
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    CreatetaskComponent
   ],
   exports: [
     CommonModule,
@@ -79,7 +91,9 @@ import {
     MatSelectModule,
     MatSidenavModule,
     MatBadgeModule,
-    SearchComponent
+    HighchartsChartModule,
+    SearchComponent,
+    NoWhitespaceDirective
   ]
 })
 export class ShareModule { }

@@ -1,33 +1,15 @@
-.task-container {
-  box-sizing: border-box;
-  max-width: 1100px;
-  margin: 1rem auto;
-  height: 75vh;
-  display: flex;
-  overflow-x: auto;
-}
+/* .overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+} */
 
-.list {
-  flex: 0 0 32%;
-  margin-right: 1rem;
-  overflow-x: hidden;
-  background: white;
-  border: 2px solid rgba(47, 140, 223, 1.0);
-  border-radius: 5px;
-}
-
-.button-group {
-  box-sizing: border-box;
-  max-width: 1100px;
-  margin: 0 auto;
-  margin-top: 3rem;
-  display: flex;
-  align-items: center;
-}
-
-.project-description {
-  flex: 1 1 50%;
-}
 
 .backButton {
   text-align: left;
@@ -47,3 +29,189 @@ mat-toolbar {
 mat-icon :hover {
   font-size: 2rem;
 }
+
+.container {
+  width: 100%;
+  min-width: 100%;
+  height: 80vh;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.top-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background-color: #278AE2;
+}
+
+.side-bar-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu {
+  z-index: 99;
+  color: inherit;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  color: #f5f5f5;
+  display: none;
+}
+
+.side-bar {
+  width: 240px;
+  min-width: 240px;
+  max-width: 240px;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  position: relative;
+  transition: all .5s ease-out;
+}
+
+.content {
+  flex: 1 1 auto;
+  z-index: 3;
+}
+
+.side-header {
+  height: 200px;
+  min-height: 200px;
+  max-height: 200px;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  color: #fff;
+  padding: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.side-content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.side-content a {
+  display: block;
+  border-radius: 0 30px 30px 0;
+  overflow: hidden;
+}
+
+.side-content a.active {
+  background: #278AE2;
+}
+
+.side-content a.active mat-list-item {
+  color: #ffff;
+}
+
+.actions {
+  display: none;
+}
+
+.side-content a:hover .actions {
+  display: flex;
+  margin-left: auto;
+}
+
+
+@media only screen and (max-width: 900px) {
+
+  .side-bar {
+    position: absolute;
+    left: -500px;
+    top: 0;
+    z-index: 99999;
+    height: 100%;
+  }
+
+  .side-bar:hover {
+    left: 0;
+  }
+
+  .menu {
+    display: inline-block;
+  }
+
+  .menu:hover+.side-bar,
+  .menu:focus+.side-bar {
+    left: 0;
+  }
+
+  .side-header {
+    background-color: #2E8CDF;
+  }
+
+  .side-content {
+    background-color: #f5f5f5;
+  }
+
+  .content {
+    padding-left: 2rem;
+  }
+
+
+}
+
+
+
+
+
+
+/* .container-t {
+  width: 100%;
+  min-width: 100%;
+  height: 80vh;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  background: red;
+}
+
+.top-bg-t {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  z-index: 1;
+  background-color: #278AE2;
+}
+
+mat-sidenav-container {
+  width: 100%;
+}
+
+mat-drawer-inner-container {
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 900px) {
+  mat-sidenav {
+    display: none;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+} */

@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TaskhomeComponent } from '../task/taskhome/taskhome.component';
+import { TaskhomeComponent } from './taskhome/taskhome.component';
+import { TaskitemComponent } from '../task/taskitem/taskitem.component';
 
 
 
 const taskRoutes: Routes = [
-  { path: 'tasks', component: TaskhomeComponent }
+  {
+    path: '', component: TaskhomeComponent, children: [
+      { path: '', component: TaskitemComponent, pathMatch: 'full' },
+      { path: ':id', component: TaskitemComponent, pathMatch: 'full' }
+    ]
+  }
 ];
 
 @NgModule({

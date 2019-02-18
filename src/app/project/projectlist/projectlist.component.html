@@ -1,12 +1,21 @@
-<app-search (emitKeyword)="searchProduct($event)"></app-search>
+<div class="wrapper px-4">
+  <div class="top-bg"></div>
 
-<div class="container">
-  <div class="add-button">
-    <button mat-raised-button color="primary" (click)="openCreateProjectDialog()">Create Project</button>
+  <div class="header my-3">
+    <div class="logo">
+      <mat-icon class="mr-1">ballot</mat-icon>
+      <span>Projects</span>
+    </div>
+    <app-search (emitKeyword)="searchProduct($event)"></app-search>
+    <div class="add-button">
+      <button mat-raised-button (click)="openCreateProjectDialog()">ADD PROJECT</button>
+    </div>
   </div>
-  <div class="project-list">
-    <app-project *ngFor="let project of projects" [project]="project" (oninvite)="openInviteMemberDialog()" (onedit)="openEditProjectDialog(project)"
-      (ondelete)="openDeleteProjectDialog(project)">
-    </app-project>
+  <div class="container">
+    <div class="project-list">
+      <app-project class="project-card" *ngFor="let project of projects" [project]="project" (oninvite)="openInviteMemberDialog()"
+        (onedit)="openEditProjectDialog(project)" (ondelete)="openDeleteProjectDialog(project)">
+      </app-project>
+    </div>
   </div>
 </div>

@@ -2,12 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ShareModule } from './share/share.module';
 import { CoreModule } from './core/core.module';
+import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module';
-import { ProjectModule } from './project/project.module';
-import { TaskModule } from './task/task.module';
+
+
 
 import { AppComponent } from './app.component';
-
 import { AppRoutingModule } from './app_routing.module';
 
 @NgModule({
@@ -18,9 +18,8 @@ import { AppRoutingModule } from './app_routing.module';
     BrowserModule,
     ShareModule,
     CoreModule,
+    HomeModule,
     LoginModule,
-    TaskModule,
-    ProjectModule,
     AppRoutingModule
   ],
   providers: [],

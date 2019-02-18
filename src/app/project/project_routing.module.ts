@@ -2,12 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ProjectlistComponent } from './projectlist/projectlist.component';
-import { TaskhomeComponent } from '../task/taskhome/taskhome.component';
-
 
 const projectRoutes: Routes = [
-  { path: 'projects', component: ProjectlistComponent },
-  { path: 'projects/:id', component: TaskhomeComponent }
+  { path: '', component: ProjectlistComponent },
+  { path: ':id/tasklists', loadChildren: '../task/task.module#TaskModule' }
 ];
 
 @NgModule({

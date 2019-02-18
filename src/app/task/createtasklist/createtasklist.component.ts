@@ -18,7 +18,8 @@ export class CreatetasklistComponent implements OnInit {
     }
   }
   onClick() {
-    if (!this.taskListName || this.taskListName.length === 0 || !this.taskListName.trim()) {
+    console.log('hit');
+    if (!this.taskListName.trim()) {
       return;
     }
     this.dialogRef.close(this.taskListName.trim());

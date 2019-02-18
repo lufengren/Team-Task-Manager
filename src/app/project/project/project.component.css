@@ -1,26 +1,38 @@
-a {
-  color: inherit;
+mat-card {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.project-card {
-  box-sizing: border-box;
-  height: 370px;
+mat-card a {
+  color: inherit;
+  flex: 1;
+  border: none;
 }
+
+mat-card-actions {
+  display: flex;
+}
+
+mat-card-actions button {
+  flex: 1;
+}
+
+.mat-button {
+  padding: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+
 
 img {
   width: 100%;
 }
 
-.project-description {
-  box-sizing: border-box;
-  height: 11%;
+mat-card-content {
   margin-bottom: 0;
-  overflow: hidden;
-  word-wrap: break-word;
-}
-
-
-mat-card-header {
-  box-sizing: border-box;
-  overflow: hidden;
 }

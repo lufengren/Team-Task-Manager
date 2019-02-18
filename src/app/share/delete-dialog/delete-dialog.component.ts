@@ -11,17 +11,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
     </div>
     <div mat-dialog-actions class="button-container">
       <button mat-raised-button color="primary" (click)="onClick()">delete</button>
+      <button type="button" mat-dialog-close mat-button>close</button>
     </div>
     </div>
   `,
   styles: [`
   .button-container {
     margin:1rem auto;
-  }
-  button {
-    background-color: rgba(187, 170, 164, 1.0);
-    border-radius: 5px;
-    font-size: 1rem;
   }
   `
   ]

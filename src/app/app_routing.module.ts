@@ -4,13 +4,15 @@ import { PageNotFoundComponent } from './core/pagenotfound/pagenotfound.componen
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/projects', pathMatch: 'full' },
+  { path: 'projects', loadChildren: './project/project.module#ProjectModule' },
+  { path: 'calendar', loadChildren: './calendar/calendar.module#MyCalendarModule' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, { enableTracing: false })
   ],
   exports: [
     [RouterModule]

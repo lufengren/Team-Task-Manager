@@ -1,27 +1,21 @@
-<mat-nav-list>
-  <h3 mat-subheader>Projects</h3>
-  <mat-list-item routerLink="/projects" (click)="onClick()">
-    <mat-icon mat-list-icon svgIcon='home'></mat-icon>
-    <h4 mat-line>Home</h4>
-    <p mat-line>view all projects</p>
-  </mat-list-item>
+<mat-nav-list class="mt-1">
+  <a routerLink="/home" routerLinkActive="active" (click)="onClick()">
+    <mat-list-item>
+      <mat-icon mat-list-icon svgIcon='home'></mat-icon>
+      <h4 mat-line>Dashboard</h4>
+    </mat-list-item>
+  </a>
+  <a routerLink="/projects" routerLinkActive="active" (click)="onClick()">
+    <mat-list-item>
+      <mat-icon mat-list-icon svgIcon='project'></mat-icon>
+      <h4 mat-line>Projects</h4>
+    </mat-list-item>
+  </a>
   <mat-divider></mat-divider>
-  <h3 mat-subheader>Calender</h3>
-  <mat-list-item>
-    <mat-icon mat-list-icon svgIcon='home'></mat-icon>
-    <h4 mat-line>Home</h4>
-    <p mat-line>view all calendars</p>
-  </mat-list-item>
-  <mat-list-item>
-    <mat-icon mat-list-icon svgIcon='month'></mat-icon>
-    <span mat-line>By-month</span>
-  </mat-list-item>
-  <mat-list-item>
-    <mat-icon mat-list-icon svgIcon='week'></mat-icon>
-    <span mat-line>By-week</span>
-  </mat-list-item>
-  <mat-list-item>
-    <mat-icon mat-list-icon svgIcon='day'></mat-icon>
-    <span mat-line>By-day</span>
-  </mat-list-item>
+  <a routerLink="/calendar" routerLinkActive="active" (click)="onClick()">
+    <mat-list-item>
+      <mat-icon mat-list-icon svgIcon='month'></mat-icon>
+      <span mat-line>Calendar</span>
+    </mat-list-item>
+  </a>
 </mat-nav-list>

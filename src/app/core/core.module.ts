@@ -2,7 +2,6 @@ import { NgModule, SkipSelf, Optional } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ShareModule } from '../share/share.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CoreRoutingModule } from './core_routing.module';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -14,10 +13,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { loadsvg } from '../tools/loadsvg';
 
 
-
+import { HomeRoutingModule } from '../home/home_routing.module';
 import 'hammerjs';
-
-
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, SidebarComponent, PageNotFoundComponent],
@@ -25,7 +22,7 @@ import 'hammerjs';
     HttpClientModule,
     ShareModule,
     BrowserAnimationsModule,
-    CoreRoutingModule
+    HomeRoutingModule
   ],
   exports: [
     HeaderComponent,
@@ -51,3 +48,5 @@ export class CoreModule {
     loadsvg(ir, ds);
   }
 }
+
+

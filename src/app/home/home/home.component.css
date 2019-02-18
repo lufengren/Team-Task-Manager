@@ -1,3 +1,7 @@
+.wrapper {
+  background: #EDEDED;
+}
+
 .container {
   box-sizing: border-box;
   max-width: 1100px;
@@ -6,6 +10,7 @@
 }
 
 .stat-data {
+  color: #fff;
   display: flex;
   flex-wrap: wrap;
 }
@@ -21,12 +26,30 @@
   justify-content: space-between;
 }
 
+.data-one {
+  background-color: #8179C0;
+  border: none;
+}
+
+.data-two {
+  background-color: #36a2f5;
+  border: none;
+}
+
+.data-three {
+  background-color: #eac459;
+  border: none;
+}
+
 .data-chart {
   flex: 1.5 1 0;
   display: block;
   height: 150px;
   margin: 10px;
+  border: none;
 }
+
+
 
 .stat-chart {
   display: flex;
@@ -43,7 +66,6 @@
 mat-icon {
   width: 3rem;
   height: 3rem;
-  color: rgba(251, 191, 65, 1.0);
 }
 
 .material-icons {

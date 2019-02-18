@@ -30,8 +30,8 @@ export class ProjectComponent implements OnInit {
   ngOnInit() {
     this.imgUrl = `assets/img/project/${this.project.coverImg}`;
   }
-  onInvite() {
-    this.oninvite.emit(this.project);
+  onClick(event: Event) {
+    event.stopPropagation();
   }
   onEditProject(ev: Event) {
     this.onedit.emit(this.project);
