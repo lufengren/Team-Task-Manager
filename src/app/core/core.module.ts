@@ -29,13 +29,14 @@ import 'hammerjs';
     FooterComponent,
     SidebarComponent,
     PageNotFoundComponent,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ShareModule,
   ],
   providers: [
     {
       provide: 'BASE_CONFIG', useValue: {
-        uri: 'https://lucialu.azurewebsites.net'
-        // uri: 'http://localhost:3000'
+        // uri: 'https://lucialu.azurewebsites.net'
+        uri: 'http://localhost:3000'
       }
     }
   ]

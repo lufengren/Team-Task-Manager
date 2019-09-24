@@ -2,8 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Task } from '../domain';
 import { Observable } from 'rxjs';
-import { mergeMap, switchMap, concatMap } from 'rxjs/operators';
-
+import { concatMap } from 'rxjs/operators';
 
 @Injectable(
   {

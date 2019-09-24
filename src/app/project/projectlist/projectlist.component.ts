@@ -36,7 +36,9 @@ export class ProjectlistComponent implements OnInit {
     dialogRef.afterClosed().subscribe(newProject => {
       if (newProject) {
         this.service$.add(newProject).subscribe(res => {
-          if (res) {
+          if (res.status === 0) {
+            throw new Error('project name exists');
+          } else {
             this.projects = [res, ...this.projects];
           }
         });
@@ -76,5 +78,8 @@ export class ProjectlistComponent implements OnInit {
       .subscribe(res => {
         this.projects = res.reverse();
       });
+    // this.service$.get().subscribe(res => {
+    //   this.projects = res;
+    // });
   }
 }

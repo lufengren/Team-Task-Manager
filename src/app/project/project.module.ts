@@ -5,9 +5,7 @@ import { ProjectlistComponent } from './projectlist/projectlist.component';
 import { CreateprojectComponent } from './createproject/createproject.component';
 import { ProjectComponent } from './project/project.component';
 
-
 import { ProjectRoutingModule } from './project_routing.module';
-
 
 @NgModule({
   declarations: [
@@ -27,3 +25,5 @@ import { ProjectRoutingModule } from './project_routing.module';
   ]
 })
 export class ProjectModule { }
+
+

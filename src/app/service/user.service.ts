@@ -1,15 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Project, User } from '../domain';
-import { Observable, from, of } from 'rxjs';
-import { filter, reduce, map, mergeMap, switchMap } from 'rxjs/operators';
-
+import { User } from '../domain';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
   private domain = 'users';
   private headers = new HttpHeaders({
     'Content-Type': 'application/json'
@@ -42,15 +39,4 @@ export class UserService {
     return this.http
       .patch<User>(uri, JSON.stringify({ projectIds: toUpdate }), { headers: this.headers });
   }
-
-  //   batchUpdateProjectRef(project: Project): Observable<User[]> {
-  //     const projectId = project.id;
-  //     const memberIds = project.members ? project.members : [];
-  //     return from(memberIds).pipe(switchMap(id => {
-  //       const uri = `${this.config.uri}/${this.domain}/${id}`;
-  //       return this.http.get<User>(uri);
-  //     })).pipe(filter(user => user.projectIds.indexOf(projectId) < 0))
-  //     .pipe(switchMap(u => this.addProjectRef(u, projectId)))
-  //     .pipe(reduce((users, curr) => [...users, curr], []));
-  //   }
 }
