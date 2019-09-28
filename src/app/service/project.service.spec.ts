@@ -13,7 +13,7 @@ describe('ProjectServiceTesting', () => {
       providers: [ProjectService,
         {
           provide: 'BASE_CONFIG', useValue: {
-            uri: 'http://localhost:3000'
+            uri: baseURI
           }
         }]
     });

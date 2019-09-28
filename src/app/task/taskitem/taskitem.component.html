@@ -1,18 +1,3 @@
-<!-- <mat-list-item *ngFor="let task of tasks" (click)="onClick(task)" class="list-item">
-  <mat-checkbox class="checkbox" color="primary" (click)="onClickCheckbox($event)" [checked]="task.completed" (change)="toggleTaskStatus(task)">
-  </mat-checkbox>
-  <div class="content">
-    <div class="desc" [class.isCompleted]="task.completed" matTooltip="{{task.desc}}">{{task.desc}}</div>
-    <div class="extra-content">
-      <div class="due-date">
-        <mat-icon>alarm</mat-icon>
-        <span [class.isCompleted]="task.completed">{{task.endDate | date: "MM-dd-yy"}}</span>
-      </div>
-      <div [ngClass]="{'high-priority':task.priority===1,'mid-priority':task.priority===2,'low-priority':task.priority===3}"
-        class="priority"></div>
-    </div>
-  </div>
-</mat-list-item> -->
 <div class="container pr-2">
   <div class="content-header">
     <div class="arrow-button">
@@ -53,7 +38,8 @@
 
         <div class="actions">
           <div class="priority-container">
-            <div [ngClass]="{'high-priority':task.priority===1,'mid-priority':task.priority===2,'low-priority':task.priority===3}"
+            <div
+              [ngClass]="{'high-priority':task.priority===1,'mid-priority':task.priority===2,'low-priority':task.priority===3}"
               class="priority">
             </div>
           </div>

@@ -10,7 +10,7 @@ const taskRoutes: Routes = [
   {
     path: '', component: TaskhomeComponent, children: [
       { path: '', component: TaskitemComponent, pathMatch: 'full' },
-      { path: ':id', component: TaskitemComponent, pathMatch: 'full' }
+      { path: ':id', component: TaskitemComponent, pathMatch: 'full' },
     ]
   }
 ];

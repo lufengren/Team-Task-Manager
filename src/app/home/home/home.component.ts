@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import SunsetTheme from 'highcharts/themes/sunset';
-
+import { Observable } from 'rxjs';
 import { ProjectService } from '.././../service/project.service';
 import { TasklistService } from '../../service/tasklist.service';
 import { TaskService } from '../../service/task.service';
@@ -23,11 +23,12 @@ Highcharts.setOptions({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
-  numberOfProjects: number;
-  numberOfTasklists: number;
-  numberOfTasks: number;
-  Highcharts = Highcharts;
+  private numberOfProjects$: Observable<number>;
+  private numberOfTasklists$: Observable<number>;
+  private numberOfTasks$: Observable<number>;
+  private Highcharts = Highcharts;
   project = {
     title: { text: 'Projects' },
     yAxis: {
@@ -132,8 +133,12 @@ export class HomeComponent implements OnInit {
   constructor(private projects$: ProjectService, private tasklists$: TasklistService, private tasks$: TaskService) { }
 
   ngOnInit() {
-    this.projects$.get().subscribe(projects => this.numberOfProjects = projects.length);
-    this.tasklists$.get().subscribe(tasklists => this.numberOfTasklists = tasklists.length);
-    this.tasks$.get().subscribe(tasks => this.numberOfTasks = tasks.length);
+    this.numberOfProjects$ = this.projects$.getLength();
+    this.numberOfTasklists$ = this.tasklists$.getLength();
+    this.numberOfTasks$ = this.tasks$.getLength();
+    // this.projects$.getLength().subscribe(number => this.numberOfProjects = number);
+    // this.tasklists$.getLength().subscribe(number => this.numberOfTasklists = number);
+    // this.tasks$.getLength().subscribe(number => this.numberOfTasks = number);
   }
+
 }

@@ -1,33 +1,3 @@
-<!-- <div>
-  <div class="button-group">
-    <button (click)="backToProjects()" class="backButton">
-      <mat-icon color="primary">arrow_back</mat-icon>
-    </button>
-    <div class="project-description">
-      <h2>{{currentProject?.name}}</h2>
-      <p>{{currentProject?.desc}}</p>
-    </div>
-    <button mat-raised-button color="primary" (click)="openCreateTaskListDialog()">
-      Add Tasklist
-    </button>
-  </div>
-  <mat-toolbar *ngIf="lists?.length===0">
-    <span>You have not got any tasklist, please add...</span>
-  </mat-toolbar>
-  <div class="task-container">
-    <app-tasklist class="list" *ngFor="let list of lists">
-      <app-taskheader [header]="list.name" [numberOfTasks]="numberOfTasks" (newTask)="openCreateTaskDialog(list.id)"
-        (moveTaskList)="openMoveTaskListDialog()" (editTaskList)="openEditTaskListDialog(list)" (deleteTaskList)="openDeleteTaskListDialog(list)">
-      </app-taskheader>
-      <app-quicktask (quicktask)="createQuickTask($event,list.id)"></app-quicktask>
-      <app-taskitem [listId]="list.id" [newTask]="newTask" [updatedTask]="updatedTask" (editTask)="openEditTaskDialog($event)"
-        (taskStatus)="toggleTaskStatus($event)">
-      </app-taskitem>
-    </app-tasklist>
-  </div>
-</div> -->
-
-
 <div class="container">
   <div class="top-bg"></div>
   <div class="side-bar-container">
@@ -47,13 +17,13 @@
         <div>
           <mat-nav-list>
             <a [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
-            true}"
-              (click)="task.getAllTasks(lists)">
+            true}" (click)="task.showAllTasks()">
               <mat-list-item>
                 All
               </mat-list-item>
             </a>
-            <a *ngFor="let list of lists" [routerLink]="[list.id]" routerLinkActive="active" (click)="task.getTasks(list.id)">
+            <a *ngFor="let list of lists" [routerLink]="[list.id]" routerLinkActive="active"
+              (click)="task.filterTasksByTasklistId(list.id)">
               <mat-list-item class="list-container">
                 <span>{{ list.name }}</span>
                 <div class="actions">
@@ -72,58 +42,8 @@
     </div>
   </div>
   <div class="content">
-    <app-taskitem #task [lists]="lists" (emitAddEvent)="openCreateTaskDialog(currentProject?.id)" (emitEditEvent)="openEditTaskDialog($event)"
-      [updateTask]="updateTask" (taskStatus)="toggleTaskStatus($event)">
+    <app-taskitem #task [tasks]="allTasks" (emitAddEvent)="openCreateTaskDialog(currentProject?.id)"
+      (emitEditEvent)="openEditTaskDialog($event)" (taskStatus)="toggleTaskStatus($event)">
     </app-taskitem>
   </div>
 </div>
-
-<!-- <div class="container-t">
-  <div class="top-bg-t"></div>
-  <mat-sidenav-container>
-    <mat-sidenav mode="side" opened #sidenav>
-      <div class="side-bar" [ngClass]="{'show': isHidden, 'hide':isHidden }">
-        <div class="side-header">
-          <span class="font-size-2">{{currentProject?.name}}</span>
-          <span class="overflow-hidden" matTooltip={{currentProject?.desc}}>{{currentProject?.desc}}</span>
-        </div>
-        <div class="side-content">
-          <div class="pt-2 pb-1 px-2">
-            <button mat-raised-button color="primary" class="full-width" (click)="openCreateTaskListDialog()">ADD
-              TASKLIST</button>
-          </div>
-          <div>
-            <mat-nav-list>
-              <a [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
-                    true}"
-                (click)="task.getAllTasks(lists)">
-                <mat-list-item>
-                  All
-                </mat-list-item>
-              </a>
-              <a *ngFor="let list of lists" [routerLink]="[list.id]" routerLinkActive="active" (click)="task.getTasks(list.id)">
-                <mat-list-item class="list-container">
-                  <span>{{ list.name }}</span>
-                  <div class="actions">
-                    <button mat-icon-button (click)="openEditTaskListDialog(list)">
-                      <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-icon-button (click)="openDeleteTaskListDialog(list)">
-                      <mat-icon>clear</mat-icon>
-                    </button>
-                  </div>
-                </mat-list-item>
-              </a>
-            </mat-nav-list>
-          </div>
-        </div>
-      </div>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      Main content
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div> -->

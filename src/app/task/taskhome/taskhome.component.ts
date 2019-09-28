@@ -19,6 +19,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TaskhomeComponent implements OnInit {
   lists = [];
+  allTasks = [];
   projectId: string;
   currentProject;
   updateTask;
@@ -47,6 +48,9 @@ export class TaskhomeComponent implements OnInit {
     this.projectId = this.activatedRoute.snapshot.paramMap.get('id');
     this.tasklistService$.getByProjectId(this.projectId).subscribe(tasklists => {
       this.lists = tasklists.reverse();
+    });
+    this.taskService$.getByProjectId(this.projectId).subscribe(tasks => {
+      this.allTasks = tasks;
     });
     this.projectService$.getById(this.projectId).subscribe(project => this.currentProject = project);
   }
@@ -82,22 +86,19 @@ export class TaskhomeComponent implements OnInit {
       updatedtask => this.updateTask = updatedtask);
   }
   openCreateTaskListDialog() {
-    const dialogRef = this.dialog.open(CreatetasklistComponent);
+    const dialogRef = this.dialog.open(CreatetasklistComponent, { data: { title: 'Add Tasklist' } });
     dialogRef.afterClosed().subscribe(name => {
-      if (name) {
-        const taskListInfo = {
-          name: name,
-          projectId: this.projectId,
-        };
-        this.tasklistService$.add(taskListInfo, this.projectId).subscribe(taskList => {
-          this.lists = [taskList, ...this.lists];
-        }
-        );
-      }
+      const taskListInfo = {
+        name: name,
+        projectId: this.projectId,
+      };
+      this.tasklistService$.add(taskListInfo).subscribe(taskList => {
+        this.lists = [taskList, ...this.lists];
+      });
     });
   }
   openEditTaskListDialog(list) {
-    const dialogRef = this.dialog.open(CreatetasklistComponent, { data: { tasklist: list } });
+    const dialogRef = this.dialog.open(CreatetasklistComponent, { data: { tasklist: list, title: 'Edit Tasklist' } });
     dialogRef.afterClosed().subscribe(
       updatedname => {
         if (updatedname) {

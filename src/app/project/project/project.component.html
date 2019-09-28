@@ -1,7 +1,7 @@
 <mat-card>
-  <a [routerLink]="['/projects',project.id,'tasklists']" class="card">
+  <a [routerLink]="['/projects',project.id,'tasklists','tasks']" class="card">
     <mat-card-header>
-      <mat-card-title>
+      <mat-card-title class="project-name">
         {{project.name}}
       </mat-card-title>
     </mat-card-header>
@@ -9,7 +9,7 @@
       <img mat-card-img alt="project img" [src]="imgUrl">
     </div>
     <mat-card-content class="project-description">
-      <span>
+      <span class="project-desc">
         {{project.desc}}
       </span>
     </mat-card-content>

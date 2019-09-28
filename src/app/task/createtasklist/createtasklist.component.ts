@@ -9,16 +9,16 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class CreatetasklistComponent implements OnInit {
 
   title: string;
-  taskListName;
+  taskListName: string;
   constructor(@Inject(MAT_DIALOG_DATA) private data, private dialogRef: MatDialogRef<CreatetasklistComponent>) { }
 
   ngOnInit() {
-    if (this.data) {
+    this.title = this.data.title;
+    if (this.data.tasklist) {
       this.taskListName = this.data.tasklist.name;
     }
   }
   onClick() {
-    console.log('hit');
     if (!this.taskListName.trim()) {
       return;
     }

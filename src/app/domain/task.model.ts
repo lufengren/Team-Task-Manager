@@ -5,6 +5,7 @@ export interface Task {
   priority: number;
   startDate?: Date;
   endDate?: Date;
-  createDate: Date;
+  createdDate: Date;
   taskListId: string;
+  projectId: string;
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { TaskService } from '../../service/task.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
+import { Task } from '../../domain/task.model';
 
 @Component({
   selector: 'app-taskitem',
@@ -9,73 +9,41 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./taskitem.component.css']
 })
 export class TaskitemComponent implements OnInit, OnChanges {
-
-  @Input() lists;
-  @Input() updateTask;
+  @Input() tasks: Task[];
   @Output() emitAddEvent = new EventEmitter<void>();
   @Output() emitEditEvent = new EventEmitter<void>();
   @Output() taskStatus = new EventEmitter();
-  allTasks;
-  tasks;
-  childId;
-  parentId;
-  isCompleted: boolean;
+  allTasks: Task[];
+  currentTasks: Task[];
   searchTerm: FormControl = new FormControl();
 
-  routeParam;
   constructor(
-    private service$: TaskService,
-    private activatedRoute: ActivatedRoute,
     private router: Router
   ) { }
 
+  ngOnChanges() {
+    this.allTasks = this.tasks;
+    this.currentTasks = this.tasks;
+  }
   ngOnInit() {
     this.searchTerm.valueChanges
       .subscribe(term => {
-        if (!term.trim()) {
-          this.tasks = this.allTasks;
-        } else {
+        if (term.trim()) {
           this.tasks = this.allTasks.filter(task => task.desc.includes(term));
-        }
-        if (this.childId !== this.parentId) {
-          this.router.navigate(['/projects', this.parentId, 'tasklists']);
+        } else {
+          this.tasks = this.currentTasks;
         }
       });
   }
-
-  ngOnChanges() {
-    if (this.lists) {
-      this.activatedRoute.firstChild.paramMap.subscribe(childrenParams => {
-        this.childId = childrenParams.get('id');
-        this.activatedRoute.paramMap.subscribe(parentParams => {
-          this.parentId = parentParams.get('id');
-          if (this.childId === this.parentId) {
-            this.getAllTasks(this.lists);
-          } else {
-            this.getAllTasks(this.lists);
-            this.getTasks(this.childId);
-          }
-        });
-      });
-    }
+  showAllTasks() {
+    this.tasks = this.allTasks;
+    this.currentTasks = this.tasks;
   }
-
-  getAllTasks(lists) {
-    let res = [];
-    const listIds = lists.map(list => list = list.id);
-    listIds.forEach(listId => this.service$.getByListId(listId).subscribe(
-      tasks => {
-        res = [...res, ...tasks];
-        this.allTasks = res;
-        this.tasks = res.reverse();
-      }
-    ));
-  }
-
-  getTasks(taskListId) {
-    this.service$.getByListId(taskListId).subscribe(tasks => {
-      this.tasks = tasks.reverse();
+  filterTasksByTasklistId(tasklistId) {
+    this.tasks = this.allTasks.filter((item) => {
+      return item.taskListId === tasklistId;
     });
+    this.currentTasks = this.tasks;
   }
 
   emitAddClick() {
@@ -95,6 +63,5 @@ export class TaskitemComponent implements OnInit, OnChanges {
   backToProjects() {
     this.router.navigate(['/projects']);
   }
-
 
 }

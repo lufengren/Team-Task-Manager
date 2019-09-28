@@ -1,18 +1,18 @@
 <mat-nav-list class="mt-1">
-  <a routerLink="/home" routerLinkActive="active" (click)="onClick()">
+  <a routerLink="/home" routerLinkActive="active" (click)="hideSidebar()">
     <mat-list-item>
       <mat-icon mat-list-icon svgIcon='home'></mat-icon>
       <h4 mat-line>Dashboard</h4>
     </mat-list-item>
   </a>
-  <a routerLink="/projects" routerLinkActive="active" (click)="onClick()">
+  <a routerLink="/projects" routerLinkActive="active" (click)="hideSidebar()">
     <mat-list-item>
       <mat-icon mat-list-icon svgIcon='project'></mat-icon>
       <h4 mat-line>Projects</h4>
     </mat-list-item>
   </a>
   <mat-divider></mat-divider>
-  <a routerLink="/calendar" routerLinkActive="active" (click)="onClick()">
+  <a routerLink="/calendar" routerLinkActive="active" (click)="hideSidebar()">
     <mat-list-item>
       <mat-icon mat-list-icon svgIcon='month'></mat-icon>
       <span mat-line>Calendar</span>

@@ -1,8 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Task } from '../domain';
-import { Observable } from 'rxjs';
-import { concatMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { concatMap, catchError } from 'rxjs/operators';
+import { HandleError } from './handleError.service';
 
 @Injectable(
   {
@@ -16,7 +17,11 @@ export class TaskService {
     'Content-Type': 'application/json'
   });
 
-  constructor(private http: HttpClient, @Inject('BASE_CONFIG') private config) { }
+  constructor(
+    private http: HttpClient,
+    @Inject('BASE_CONFIG') private config,
+    private handleError: HandleError
+  ) { }
 
   add(task: Task): Observable<Task> {
     const uri = `${this.config.uri}/${this.domain}`;
@@ -58,6 +63,11 @@ export class TaskService {
     return this.http.get<Task[]>(uri, { params: { 'taskListId': listId } });
   }
 
+  getByProjectId(projectId): Observable<Task[]> {
+    const uri = `${this.config.uri}/${this.domain}`;
+    return this.http.get<Task[]>(uri, { params: { 'projectId': projectId } });
+  }
+
   get(): Observable<Task[]> {
     const uri = `${this.config.uri}/${this.domain}`;
     return this.http.get<Task[]>(uri);
@@ -67,6 +77,11 @@ export class TaskService {
     const uri = `${this.config.uri}/${this.domain}?endDate_gte=${start}&endDate_lte=${end}`;
     return this.http.get<Task[]>(uri);
   }
-
+  getLength(): Observable<number> {
+    // const uri = `${this.config.uri}/${this.domain}?count=true`;
+    // return this.http.get<number>(uri)
+    //   .pipe(catchError(this.handleError.handleError));
+    return (of(52));
+  }
 
 }

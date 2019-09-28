@@ -4,7 +4,7 @@
       <div class="data data-one background-set">
         <div>
           <div>Projects</div>
-          <div class="font-size-4 font-weight-300 line-height-1">{{numberOfProjects}}</div>
+          <div class="font-size-4 font-weight-300 line-height-1 projects-amount">{{numberOfProjects$ | async}}</div>
         </div>
         <div>
           <mat-icon>folder_open</mat-icon>
@@ -13,7 +13,7 @@
       <div class="data data-two background-set">
         <div>
           <div>Task Lists</div>
-          <div class="font-size-4 font-weight-300 line-height-1">{{numberOfTasklists}}</div>
+          <div class="font-size-4 font-weight-300 line-height-1 tasklists-amount">{{numberOfTasklists$ | async}}</div>
         </div>
         <div>
           <mat-icon>format_list_bulleted</mat-icon>
@@ -22,7 +22,7 @@
       <div class="data data-three background-set">
         <div>
           <div>Tasks</div>
-          <div class="font-size-4 font-weight-300 line-height-1">{{numberOfTasks}}</div>
+          <div class="font-size-4 font-weight-300 line-height-1 tasks-amount">{{numberOfTasks$ | async}}</div>
         </div>
         <div>
           <mat-icon>event_note</mat-icon>
@@ -37,7 +37,6 @@
 
       <highcharts-chart class="background-set chart" [Highcharts]="Highcharts" [options]="project">
       </highcharts-chart>
-
 
       <highcharts-chart class="background-set chart" [Highcharts]="Highcharts" [options]="task">
       </highcharts-chart>

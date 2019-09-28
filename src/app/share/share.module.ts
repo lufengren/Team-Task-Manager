@@ -31,7 +31,6 @@ import {
   MatBadgeModule
 } from '@angular/material';
 
-
 @NgModule({
   declarations: [
     DeleteDialogComponent,
