@@ -1,0 +1,29 @@
+<div class="task-container">
+  <mat-checkbox class="mr-2" color="primary" (click)="stopPropgate($event)" [checked]="task.completed"
+    (change)="toggleTaskStatus(task)">
+  </mat-checkbox>
+  <div class="task-detail">
+    <div class="desc" [class.isCompleted]="task.completed">
+      <div class="desc-detail">
+        {{task.desc}}
+      </div>
+      <div>
+        <mat-icon>alarm</mat-icon>
+        <span [class.isCompleted]="task.completed" class="due-date">{{task.endDate | date: "MM-dd-yy"}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <div
+      [ngClass]="{'high-priority':task.priority===1,'mid-priority':task.priority===2,'low-priority':task.priority===3}"
+      class="priority">
+    </div>
+    <button mat-icon-button>
+      <mat-icon (click)="emitEditTask(task)">edit</mat-icon>
+    </button>
+    <!-- <button mat-icon-button>
+      <mat-icon>delete</mat-icon>
+    </button> -->
+  </div>
+</div>

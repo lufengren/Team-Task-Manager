@@ -1,16 +1,3 @@
-/* .overlay {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 100;
-} */
-
-
 .backButton {
   text-align: left;
   background-color: transparent;
@@ -76,8 +63,17 @@ mat-icon :hover {
 }
 
 .content {
-  flex: 1 1 auto;
-  z-index: 3;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-search {
+  z-index: 999;
+  height: 200px;
+  max-height: 200px;
+  min-height: 200px;
+  margin-right: 1rem;
 }
 
 .side-header {
@@ -113,15 +109,78 @@ mat-icon :hover {
   color: #ffff;
 }
 
-.actions {
+.content-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  height: 120px;
+  min-height: 120px;
+  max-height: 120px;
+}
+
+.content-header .backButton {
+  background: transparent;
+  border: none;
+}
+
+.content-header .backButton:hover {
+  cursor: pointer;
+}
+
+.backButton mat-icon {
+  height: 36px;
+  width: 36px;
+  color: #ffff;
+}
+
+.backButton .material-icons {
+  font-size: 36px;
+}
+
+.search-wrapper {
+  max-width: 500px;
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 25px;
+}
+
+.menu-container {
   display: none;
 }
 
-.side-content a:hover .actions {
+.search {
   display: flex;
-  margin-left: auto;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  line-height: 3rem;
 }
 
+.search input {
+  flex: 1;
+  border: none;
+  outline: 0;
+  font-size: 1rem;
+  padding: 0;
+  border-radius: 30px;
+}
+
+.search mat-icon {
+  color: #757575;
+}
+
+.content-detail {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: auto;
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
 
 @media only screen and (max-width: 900px) {
 
@@ -158,60 +217,4 @@ mat-icon :hover {
     padding-left: 2rem;
   }
 
-
 }
-
-
-
-
-
-
-/* .container-t {
-  width: 100%;
-  min-width: 100%;
-  height: 80vh;
-  display: flex;
-  overflow: hidden;
-  position: relative;
-  background: red;
-}
-
-.top-bg-t {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 200px;
-  z-index: 1;
-  background-color: #278AE2;
-}
-
-mat-sidenav-container {
-  width: 100%;
-}
-
-mat-drawer-inner-container {
-  overflow: hidden;
-}
-
-@media only screen and (max-width: 900px) {
-  mat-sidenav {
-    display: none;
-  }
-
-  .hide {
-    display: none;
-  }
-
-  .show {
-    display: block;
-  }
-}
-
-.hide {
-  display: none;
-}
-
-.show {
-  display: block;
-} */

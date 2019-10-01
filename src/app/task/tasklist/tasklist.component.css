@@ -1,0 +1,22 @@
+a {
+  display: block;
+  border-radius: 0 30px 30px 0;
+  overflow: hidden;
+}
+
+.actions {
+  display: none;
+}
+
+a:hover .actions {
+  display: flex;
+  margin-left: auto;
+}
+
+a.active {
+  background: #278AE2;
+}
+
+a.active mat-list-item {
+  color: #ffff;
+}

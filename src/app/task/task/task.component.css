@@ -1,0 +1,87 @@
+.task-container {
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
+  display: flex;
+  padding: 1rem;
+}
+
+.task-container:hover {
+  background-color: #EBEBEB;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.actions button mat-icon {
+  color: rgba(0, 0, 0, .54);
+}
+
+.isCompleted {
+  text-decoration: line-through rgba(39, 138, 226, 1.0) double;
+}
+
+.priority {
+  width: 15px;
+  height: 15px;
+  min-width: 15px;
+  min-height: 15px;
+  border-radius: 50%;
+}
+
+.high-priority {
+  background-color: rgba(232, 67, 59, 1.0);
+}
+
+.mid-priority {
+  background-color: rgba(253, 192, 47, 1.0);
+}
+
+.low-priority {
+  background-color: rgba(59, 139, 63, 1.0);
+}
+
+.task-detail {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.desc {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.desc-detail {
+  font-size: 1.2rem;
+}
+
+
+@media only screen and (max-width: 900px) {
+  .menu-container {
+    margin-left: 1rem;
+    border-right: 1px solid #ebebeb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .arrow-button {
+    order: 2;
+    width: 50%;
+  }
+
+  .search-wrapper {
+    order: 1;
+    max-width: 1100px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .add-button {
+    order: 3;
+    width: 50%;
+    text-align: right;
+  }
+}

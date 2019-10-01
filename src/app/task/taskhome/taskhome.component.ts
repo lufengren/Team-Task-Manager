@@ -10,7 +10,10 @@ import { TaskService } from '../../service/task.service';
 import { ProjectService } from '../../service/project.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { Tasklist } from '../../domain/tasklist.model';
+import { Task } from '../../domain/task.model';
+import { Project } from '../../domain/project.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-taskhome',
@@ -18,14 +21,17 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./taskhome.component.css']
 })
 export class TaskhomeComponent implements OnInit {
-  lists = [];
-  allTasks = [];
+  allLists: Tasklist[];
+  allTasks: Task[];
+  tasks: Task[];
+  currentTasks: Task[];
   projectId: string;
-  currentProject;
-  updateTask;
+  currentProject: Project;
+  currentTasklistId: string;
 
   isHidden = false;
   @Output() activeTaskItem = new EventEmitter();
+  searchTerm: FormControl = new FormControl();
 
   constructor(
     private dialog: MatDialog,
@@ -45,56 +51,62 @@ export class TaskhomeComponent implements OnInit {
     //     })
     // ).subscribe(tasklists => this.lists = tasklists.reverse());
     // this.projectService$.get().subscribe();
-    this.projectId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.tasklistService$.getByProjectId(this.projectId).subscribe(tasklists => {
-      this.lists = tasklists.reverse();
-    });
-    this.taskService$.getByProjectId(this.projectId).subscribe(tasks => {
-      this.allTasks = tasks;
-    });
-    this.projectService$.getById(this.projectId).subscribe(project => this.currentProject = project);
-  }
-  openCreateTaskDialog(projectId) {
-    this.tasklistService$.getByProjectId(projectId).subscribe(tasklists => {
-      const dialogRef = this.dialog.open(CreatetaskComponent, { data: { tasklists: this.lists } });
-      dialogRef.afterClosed().subscribe(newTask => {
-        if (newTask) {
-          this.taskService$.add(newTask).subscribe(task => {
-            this.updateTask = task;
-          });
+
+    this.searchTerm.valueChanges
+      .subscribe(term => {
+        if (term.trim()) {
+          this.tasks = this.currentTasks.filter(task => task.desc.includes(term));
+        } else {
+          this.tasks = this.currentTasks;
         }
-      }
-      );
+      });
+
+    this.projectId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.getProjectInfo(this.projectId);
+    this.getTasklistsByProjectId(this.projectId);
+    this.getTasksByProjectId(this.projectId);
+  }
+  getProjectInfo(id) {
+    this.projectService$.getById(id).subscribe(project => this.currentProject = project);
+  }
+  getTasklistsByProjectId(id) {
+    this.tasklistService$.getByProjectId(id).subscribe(tasklists => {
+      this.allLists = tasklists.reverse();
     });
   }
-  openEditTaskDialog(task) {
-    const dialogRef = this.dialog.open(CreatetaskComponent, { data: { task: task, tasklists: this.lists } });
-    dialogRef.afterClosed().subscribe(updatedInfo => {
-      if (updatedInfo) {
-        this.taskService$.update(updatedInfo, task.id).subscribe(
-          updateTask => this.updateTask = updateTask
-        );
-      }
-    }
-    );
+  getTasksByProjectId(id) {
+    this.taskService$.getByProjectId(id).subscribe((tasks) => {
+      this.allTasks = tasks;
+      this.tasks = tasks;
+      this.currentTasks = tasks;
+    });
   }
-  toggleTaskStatus(task) {
-    const updateInfo = {
-      completed: !task.completed
-    };
-    this.taskService$.update(updateInfo, task.id).subscribe(
-      updatedtask => this.updateTask = updatedtask);
+
+  getTasksByTasklistId(id) {
+    this.currentTasklistId = id;
+    this.tasks = this.allTasks.filter((task) => {
+      return task.taskListId === id;
+    });
   }
+  showAllTasks() {
+    this.currentTasklistId = null;
+    this.tasks = this.allTasks;
+  }
+
+  // eventhandlers for opetate task list(create/edit/delete)
   openCreateTaskListDialog() {
     const dialogRef = this.dialog.open(CreatetasklistComponent, { data: { title: 'Add Tasklist' } });
     dialogRef.afterClosed().subscribe(name => {
-      const taskListInfo = {
-        name: name,
-        projectId: this.projectId,
-      };
-      this.tasklistService$.add(taskListInfo).subscribe(taskList => {
-        this.lists = [taskList, ...this.lists];
-      });
+      if (name !== '') {
+        const taskListInfo = {
+          name: name,
+          projectId: this.projectId,
+        };
+        this.tasklistService$.add(taskListInfo).subscribe(taskList => {
+          this.allLists = [taskList, ...this.allLists];
+          this.router.navigate(['/projects', this.projectId, 'tasklists', 'tasks', parseInt(taskList.id, 10)]);
+        });
+      }
     });
   }
   openEditTaskListDialog(list) {
@@ -104,8 +116,8 @@ export class TaskhomeComponent implements OnInit {
         if (updatedname) {
           this.tasklistService$.update({ name: updatedname }, list.id, this.projectId).subscribe(
             (updatedTasklist) => {
-              const index = this.lists.map(item => item.id).indexOf(updatedTasklist.id);
-              this.lists = [...this.lists.slice(0, index), updatedTasklist, ...this.lists.slice(index + 1)];
+              const index = this.allLists.map(item => item.id).indexOf(updatedTasklist.id);
+              this.allLists = [...this.allLists.slice(0, index), updatedTasklist, ...this.allLists.slice(index + 1)];
             }
           );
         }
@@ -120,17 +132,52 @@ export class TaskhomeComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(res => {
       if (res === 'true') {
-        this.tasklistService$.delete(list).subscribe(
+        this.tasklistService$.delete(list.id).subscribe(
           () => {
-            this.lists = this.lists.filter(item => item.id !== list.id);
-            this.router.navigate(['/projects', this.projectId, 'tasklists']);
+            this.allLists = this.allLists.filter(item => item.id !== list.id);
+            this.router.navigate(['/projects', this.projectId, 'tasklists', 'tasks']);
+            this.getTasksByProjectId(this.projectId);
           }
         );
       }
     });
   }
+  // eventhandlers for opetate task (create/edit/delete)
+  openCreateTaskDialog() {
+    const dialogRef = this.dialog.open(CreatetaskComponent, { data: { tasklists: this.allLists } });
+    dialogRef.afterClosed().subscribe(taskInfo => {
+      if (taskInfo) {
+        this.taskService$.add(taskInfo, this.projectId, this.currentTasklistId).subscribe((newTask) => {
+          this.allTasks = [newTask, ...this.allTasks];
+          if (this.currentTasklistId === newTask.taskListId) {
+            this.tasks = [newTask, ...this.tasks];
+          }
+          if (!this.currentTasklistId) {
+            this.tasks = this.allTasks;
+          }
+        });
+      }
+    });
+  }
+  openEditTaskDialog(task: Task) {
+    const dialogRef = this.dialog.open(CreatetaskComponent, { data: { task: task, tasklists: this.allLists } });
+    dialogRef.afterClosed().subscribe(updateTaskInfo => {
+      if (updateTaskInfo) {
+        this.taskService$.update(updateTaskInfo, task.id).subscribe((updatedTask) => {
+          const index = this.tasks.map(item => item.id).indexOf(updatedTask.id);
+          this.tasks = [...this.tasks.slice(0, index), updatedTask, ...this.tasks.slice(index + 1)];
+        });
+      }
+    });
+  }
+  openDeleteTaskDialog(task) {
+
+  }
 
   showSidebar() {
     this.isHidden = !this.isHidden;
+  }
+  backToProjects() {
+    this.router.navigate(['/projects']);
   }
 }

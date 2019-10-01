@@ -1,0 +1,13 @@
+<a [routerLink]="[list.id]" routerLinkActive="active" (click)="emitTasklistId(list.id)">
+  <mat-list-item>
+    <span>{{ list.name }}</span>
+    <div class="actions">
+      <button mat-icon-button (click)="emitEditEvent(list)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="emitDeleteEvent(list)">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+  </mat-list-item>
+</a>

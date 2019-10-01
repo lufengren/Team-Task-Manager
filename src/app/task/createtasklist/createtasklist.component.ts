@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-createtasklist',
@@ -19,9 +20,10 @@ export class CreatetasklistComponent implements OnInit {
     }
   }
   onClick() {
-    if (!this.taskListName.trim()) {
+    const trimedTaskListName = this.taskListName.trim();
+    if (!trimedTaskListName) {
       return;
     }
-    this.dialogRef.close(this.taskListName.trim());
+    this.dialogRef.close(trimedTaskListName);
   }
 }

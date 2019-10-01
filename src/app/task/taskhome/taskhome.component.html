@@ -17,33 +17,44 @@
         <div>
           <mat-nav-list>
             <a [routerLink]="['./']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
-            true}" (click)="task.showAllTasks()">
+            true}" (click)="showAllTasks()">
               <mat-list-item>
                 All
               </mat-list-item>
             </a>
-            <a *ngFor="let list of lists" [routerLink]="[list.id]" routerLinkActive="active"
-              (click)="task.filterTasksByTasklistId(list.id)">
-              <mat-list-item class="list-container">
-                <span>{{ list.name }}</span>
-                <div class="actions">
-                  <button mat-icon-button (click)="openEditTaskListDialog(list)">
-                    <mat-icon>edit</mat-icon>
-                  </button>
-                  <button mat-icon-button (click)="openDeleteTaskListDialog(list)">
-                    <mat-icon>clear</mat-icon>
-                  </button>
-                </div>
-              </mat-list-item>
-            </a>
+            <app-tasklist *ngFor="let list of allLists" [list]="list" (emitId)="getTasksByTasklistId($event)"
+              (emitEditList)="openEditTaskListDialog($event)" (emitDeleteList)="openDeleteTaskListDialog($event)">
+            </app-tasklist>
           </mat-nav-list>
         </div>
       </div>
     </div>
   </div>
   <div class="content">
-    <app-taskitem #task [tasks]="allTasks" (emitAddEvent)="openCreateTaskDialog(currentProject?.id)"
-      (emitEditEvent)="openEditTaskDialog($event)" (taskStatus)="toggleTaskStatus($event)">
-    </app-taskitem>
+    <div class="content-search">
+      <div class="content-header">
+        <div class="arrow-button">
+          <button (click)="backToProjects()" class="backButton">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+        </div>
+
+        <div class="search-wrapper">
+          <div class="search px-2">
+            <mat-icon>search</mat-icon>
+            <input type="text" placeholder="Search for task" [formControl]="searchTerm">
+          </div>
+        </div>
+
+        <div class="add-button">
+          <button mat-raised-button (click)="openCreateTaskDialog(projectId)">ADD TASK</button>
+        </div>
+      </div>
+    </div>
+    <div class="content-detail">
+      <app-task *ngFor="let task of tasks" [task]="task" (emitEdit)="openEditTaskDialog($event)"
+        (emitDelete)="openDeleteTaskDialog($event)"></app-task>
+    </div>
+
   </div>
 </div>
