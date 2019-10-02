@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { CreatetaskComponent } from '../../share/createtask/createtask.component';
+import { CreatetaskComponent } from '../createtask/createtask.component';
 import { CreatetasklistComponent } from '../createtasklist/createtasklist.component';
 import { DeleteDialogComponent } from '../../share/delete-dialog/delete-dialog.component';
 
@@ -160,7 +160,9 @@ export class TaskhomeComponent implements OnInit {
     });
   }
   openEditTaskDialog(task: Task) {
-    const dialogRef = this.dialog.open(CreatetaskComponent, { data: { task: task, tasklists: this.allLists } });
+    const dialogRef = this.dialog.open(CreatetaskComponent, {
+      data: { task: task, tasklists: this.allLists }
+    });
     dialogRef.afterClosed().subscribe(updateTaskInfo => {
       if (updateTaskInfo) {
         this.taskService$.update(updateTaskInfo, task.id).subscribe((updatedTask) => {
@@ -181,3 +183,5 @@ export class TaskhomeComponent implements OnInit {
     this.router.navigate(['/projects']);
   }
 }
+
+

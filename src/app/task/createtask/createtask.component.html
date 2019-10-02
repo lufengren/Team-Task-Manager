@@ -1,0 +1,46 @@
+<form [formGroup]="formModel" (ngSubmit)="onSubmit()">
+  <h3 mat-dialog-title>{{title}}</h3>
+  <div mat-dialog-content>
+    <mat-form-field class="full-width description">
+      <textarea appNoSpaces type="text" matInput placeholder="Enter task description" formControlName="desc"
+        required></textarea>
+    </mat-form-field>
+    <div
+      *ngIf="formModel.controls['desc'].invalid && (formModel.controls['desc'].dirty || formModel.controls['desc'].touched)"
+      class="error-msg">
+      <div>Description is required and no whitespace.</div>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Choose Task List" formControlName="taskList">
+          <mat-option *ngFor="let tasklist of tasklists" [value]="tasklist.id">
+            {{tasklist.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="priority">
+      <mat-radio-group formControlName="priority">
+        <mat-radio-button class="radio-button" *ngFor="let priority of priorities" [value]="priority.value">
+          {{priority.label}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="date-picker">
+      <mat-form-field class="date-item">
+        <input matInput [matDatepicker]="startpicker" placeholder="Start Date" formControlName="startDate">
+        <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
+        <mat-datepicker #startpicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="endpicker" placeholder="Due Date" formControlName="endDate">
+        <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
+        <mat-datepicker #endpicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actins>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!formModel.valid">save</button>
+    <button type="button" mat-dialog-close mat-button>close</button>
+  </div>
+</form>

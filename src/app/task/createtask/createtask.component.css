@@ -1,0 +1,28 @@
+.radio-button {
+  margin-right: 1rem;
+}
+
+.date-picker {
+  display: flex;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+.priority {
+  margin-top: 1rem;
+}
+
+.date-item {
+  flex: 1;
+  padding-right: 1rem;
+}
+
+
+.error-msg {
+  color: #F1453D;
+  margin-bottom: 2rem;
+}
+
+.priority-required {
+  color: #f44336;
+}
