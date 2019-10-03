@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 
 import { CreatetaskComponent } from '../createtask/createtask.component';
 import { CreatetasklistComponent } from '../createtasklist/createtasklist.component';
-import { DeleteDialogComponent } from '../../share/delete-dialog/delete-dialog.component';
+import { DeleteDialogComponent } from '../../core/delete-dialog/delete-dialog.component';
 
 import { TasklistService } from '../../service/tasklist.service';
 import { TaskService } from '../../service/task.service';

@@ -19,10 +19,8 @@ export class TaskComponent {
   }
 
   toggleTaskStatus(task: Task) {
-    const updateInfo = {
-      completed: !task.completed
-    };
-    this.taskService$.update(updateInfo, task.id).subscribe(
+    task.completed = !task.completed;
+    this.taskService$.update(task).subscribe(
       (updatedTask) => {
         this.task.completed = updatedTask.completed;
       });
@@ -30,8 +28,4 @@ export class TaskComponent {
   emitEditTask(task: Task) {
     this.emitEdit.emit(task);
   }
-  emitDeleteTask(task: Task) {
-    this.emitDelete.emit(task);
-  }
-
 }

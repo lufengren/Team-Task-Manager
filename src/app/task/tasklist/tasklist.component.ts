@@ -7,7 +7,7 @@ import { Tasklist } from '../../domain/tasklist.model';
   styleUrls: ['./tasklist.component.css']
 })
 export class TasklistComponent {
-  @Input() list: Tasklist[];
+  @Input() list: Tasklist;
   @Output() emitId = new EventEmitter<string>();
   @Output() emitEditList = new EventEmitter<Tasklist>();
   @Output() emitDeleteList = new EventEmitter<Tasklist>();
