@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="search">
+    <mat-icon>search</mat-icon>
+    <div class="search-content">
+      <input #searchBox type="text" placeholder="Search for project" (input)="search(searchBox.value)">
+      <ul class="search-result">
+        <li *ngFor="let result of results$ | async">
+          <a [routerLink]="['/projects',result.id,'tasklists','tasks']">
+            {{result.name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

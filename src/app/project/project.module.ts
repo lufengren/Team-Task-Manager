@@ -4,6 +4,7 @@ import { ShareModule } from '../share/share.module';
 import { ProjectlistComponent } from './projectlist/projectlist.component';
 import { CreateprojectComponent } from './createproject/createproject.component';
 import { ProjectComponent } from './project/project.component';
+import { SearchComponent } from './search/search.component';
 
 import { ProjectRoutingModule } from './project_routing.module';
 
@@ -11,7 +12,8 @@ import { ProjectRoutingModule } from './project_routing.module';
   declarations: [
     ProjectlistComponent,
     CreateprojectComponent,
-    ProjectComponent
+    ProjectComponent,
+    SearchComponent
   ],
   imports: [
     ShareModule,
@@ -19,9 +21,6 @@ import { ProjectRoutingModule } from './project_routing.module';
   ],
   entryComponents: [
     CreateprojectComponent
-  ],
-  exports: [
-    ProjectlistComponent
   ]
 })
 export class ProjectModule { }

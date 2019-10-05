@@ -4,6 +4,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthGuardService implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,

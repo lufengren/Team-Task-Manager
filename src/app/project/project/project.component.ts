@@ -1,29 +1,30 @@
-import { Component, OnInit, Input, Output, EventEmitter, Inject, HostBinding, HostListener } from '@angular/core';
-import { projectCardAni } from '../../animations/projectcard';
+import { Component, OnInit, Input, Output, EventEmitter, HostBinding, HostListener } from '@angular/core';
+// import { projectCardAni } from '../../animations/projectcard';
+import { Project } from '../../domain/project.model';
 
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.css'],
-  animations: [projectCardAni]
+  // animations: [projectCardAni]
 })
 export class ProjectComponent implements OnInit {
-  @Input() project;
-  @Output() oninvite = new EventEmitter<void>();
-  @Output() onedit = new EventEmitter<void>();
-  @Output() ondelete = new EventEmitter<void>();
-  @Output() onview = new EventEmitter<void>();
+  @Input() project: Project;
+  @Output() oninvite = new EventEmitter<Project>();
+  @Output() onedit = new EventEmitter<Project>();
+  @Output() ondelete = new EventEmitter<Project>();
+  @Output() onview = new EventEmitter<Project>();
   imgUrl: string;
 
-  @HostBinding('@card') cardState = 'original';
-  @HostListener('mouseenter')
-  onMouseEnter() {
-    this.cardState = 'hover';
-  }
-  @HostListener('mouseleave')
-  onMouseLeave() {
-    this.cardState = 'original';
-  }
+  // @HostBinding('@card') cardState = 'original';
+  // @HostListener('mouseenter')
+  // onMouseEnter() {
+  //   this.cardState = 'hover';
+  // }
+  // @HostListener('mouseleave')
+  // onMouseLeave() {
+  //   this.cardState = 'original';
+  // }
 
   constructor() { }
 
@@ -40,4 +41,5 @@ export class ProjectComponent implements OnInit {
   onDelete() {
     this.ondelete.emit(this.project);
   }
+
 }

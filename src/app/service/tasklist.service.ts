@@ -4,11 +4,11 @@ import { Tasklist, Task } from '../domain';
 import { Observable, of } from 'rxjs';
 import { concatMap, catchError } from 'rxjs/operators';
 import { HandleError } from './handleError.service';
-@Injectable(
-  {
+
+@Injectable({
     providedIn: 'root'
-  }
-)
+  })
+
 export class TasklistService {
 
   private domain = 'tasklists';

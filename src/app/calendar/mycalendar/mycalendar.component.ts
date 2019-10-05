@@ -16,7 +16,7 @@ import {
 } from 'date-fns';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
-import { CreatetaskComponent } from '../../share/createtask/createtask.component';
+import { CreatetaskComponent } from '../../task/createtask/createtask.component';
 import { colors } from '../mycalendar-utils/colors';
 
 @Component({
@@ -88,7 +88,8 @@ export class MycalendarComponent implements OnInit {
         const dialogRef = this.dialog.open(CreatetaskComponent, { data: { task: event.meta.task, tasklists: tasklists } });
         dialogRef.afterClosed().subscribe(updatedInfo => {
           if (updatedInfo) {
-            this.taskService$.update(updatedInfo, event.meta.task.id).subscribe(
+            updatedInfo.id = event.meta.task.id;
+            this.taskService$.update(updatedInfo).subscribe(
               updateTask => this.fetchEvents()
             );
           }

@@ -8,3 +8,5 @@ export function NoWhitespaceValidator(): ValidatorFn {
     return isValid ? null : { 'whitespace': 'value is only whitespace' };
   };
 }
+
+

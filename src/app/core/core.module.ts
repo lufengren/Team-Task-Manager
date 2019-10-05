@@ -1,5 +1,4 @@
 import { NgModule, SkipSelf, Optional } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 import { ShareModule } from '../share/share.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -7,19 +6,24 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { loadsvg } from '../tools/loadsvg';
 
-
 import { HomeRoutingModule } from '../home/home_routing.module';
 import 'hammerjs';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, SidebarComponent, PageNotFoundComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    SidebarComponent,
+    PageNotFoundComponent,
+    DeleteDialogComponent
+  ],
   imports: [
-    HttpClientModule,
     ShareModule,
     BrowserAnimationsModule,
     HomeRoutingModule
@@ -29,8 +33,12 @@ import 'hammerjs';
     FooterComponent,
     SidebarComponent,
     PageNotFoundComponent,
+    DeleteDialogComponent,
     BrowserAnimationsModule,
     ShareModule,
+  ],
+  entryComponents: [
+    DeleteDialogComponent
   ],
   providers: [
     {

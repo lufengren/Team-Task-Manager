@@ -1,19 +1,23 @@
 <form [formGroup]="formModel" (ngSubmit)=onSubmit()>
-  <h3 mat-dialog-title>{{title}}</h3>
+  <h3 mat-dialog-title class="project-title">{{title}}</h3>
   <div mat-dialog-content>
     <div class="form-field">
       <mat-form-field>
-        <input type="text" appNoSpaces matInput placeholder="project name" formControlName="name" required>
+        <input type="text" appNoSpaces matInput class="project-name" placeholder="project name" formControlName="name"
+          required>
       </mat-form-field>
     </div>
     <div class="error-container">
-      <div *ngIf="formModel.controls['name'].errors && !formModel.controls['name'].pristine" class="error-msg">
-        <div>Project name is required and no whitespace.</div>
+      <div
+        *ngIf="formModel.controls['name'].invalid && (formModel.controls['name'].dirty || formModel.controls['name'].touched)"
+        class="error-msg">
+        <div>Project name is required and can not only has space.</div>
       </div>
     </div>
     <div class="form-field">
       <mat-form-field>
-        <textarea type="text" matInput placeholder="project description" formControlName="desc"></textarea>
+        <textarea type="text" matInput class="project-desc" placeholder="project description"
+          formControlName="desc"></textarea>
       </mat-form-field>
     </div>
   </div>

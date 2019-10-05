@@ -9,12 +9,17 @@ import { throwError } from 'rxjs';
 export class HandleError {
     constructor() { }
     handleError(error: HttpErrorResponse) {
+        let errMsg = '';
         if (error.error instanceof ErrorEvent) {
+            errMsg = error.error.message;
             console.error('An error occured:', error.error.message);
         } else {
+            errMsg = `${error.status} ${error.message}`;
             console.error(`Backend returned code ${error.status},` +
                 ` ${error.message}`);
         }
-        return throwError('Something bad happened; please try again later.');
+        // return Rxjs ErrorObservable
+        return throwError(errMsg);
     }
+
 }

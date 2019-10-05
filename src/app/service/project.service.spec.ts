@@ -50,7 +50,6 @@ describe('ProjectServiceTesting', () => {
   describe('# update a project', () => {
     it('should return an Observable<Project>', () => {
       const dummyUpdatedProject = {
-        status: 1,
         id: '2',
         name: 'BookClub',
         desc: 'Students read either novels or selections.',
@@ -59,8 +58,9 @@ describe('ProjectServiceTesting', () => {
       service.update({
         name: 'BookClub',
         desc: 'Students read either novels or selections.',
-        coverImg: 'https://ImageServer/123'
-      }, 2).subscribe((res) => {
+        coverImg: 'https://ImageServer/123',
+        id: '2'
+      }).subscribe((res) => {
         expect(res).toEqual(dummyUpdatedProject);
       });
       const req = httpMock.expectOne(`${baseURI}/projects/2`);
@@ -77,7 +77,7 @@ describe('ProjectServiceTesting', () => {
         desc: 'Students read either novels or selections.',
         coverImg: 'https://ImageServer/123'
       };
-      service.delete(2).subscribe((res) => {
+      service.delete('2').subscribe((res) => {
         expect(res).toEqual(dummyDeletedProject);
       });
       const req = httpMock.expectOne(`${baseURI}/projects/2`);
@@ -94,7 +94,7 @@ describe('ProjectServiceTesting', () => {
         desc: 'Students read either novels or selections.',
         coverImg: 'https://ImageServer/123'
       };
-      service.getById(3).subscribe((res) => {
+      service.getById('3').subscribe((res) => {
         expect(res).toEqual(dummyProject);
       });
       const req = httpMock.expectOne(`${baseURI}/projects/3`);

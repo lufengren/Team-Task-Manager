@@ -4,8 +4,8 @@ export interface Task {
   completed: boolean;
   priority: number;
   startDate?: Date;
-  endDate?: Date;
-  createdDate: Date;
+  endDate?: any;
+  createdDate?: Date;
   taskListId: string;
   projectId: string;
 }

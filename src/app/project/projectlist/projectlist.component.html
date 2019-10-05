@@ -6,15 +6,16 @@
       <mat-icon class="mr-1">ballot</mat-icon>
       <span>Projects</span>
     </div>
-    <app-search (emitKeyword)="searchProduct($event)"></app-search>
+    <app-search></app-search>
     <div class="add-button">
       <button mat-raised-button (click)="openCreateProjectDialog()">ADD PROJECT</button>
     </div>
   </div>
   <div class="container">
     <div class="project-list">
-      <app-project class="project-card" *ngFor="let project of projects" [project]="project" (oninvite)="openInviteMemberDialog()"
-        (onedit)="openEditProjectDialog(project)" (ondelete)="openDeleteProjectDialog(project)">
+      <app-project class="project-card" *ngFor="let project of projects" [project]="project"
+        (oninvite)="openInviteMemberDialog()" (onedit)="openEditProjectDialog(project)"
+        (ondelete)="openDeleteProjectDialog(project)">
       </app-project>
     </div>
   </div>

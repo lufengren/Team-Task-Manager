@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { HighchartsChartModule } from 'highcharts-angular';
-
-import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
-import { SearchComponent } from './search/search.component';
-import { CreatetaskComponent } from './createtask/createtask.component';
 
 import { NoWhitespaceDirective } from '../directive/no-whitespace.directive';
 
@@ -33,15 +30,13 @@ import {
 
 @NgModule({
   declarations: [
-    DeleteDialogComponent,
-    SearchComponent,
-    CreatetaskComponent,
     NoWhitespaceDirective
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -63,14 +58,11 @@ import {
     MatBadgeModule,
     HighchartsChartModule
   ],
-  entryComponents: [
-    DeleteDialogComponent,
-    CreatetaskComponent
-  ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -91,7 +83,6 @@ import {
     MatSidenavModule,
     MatBadgeModule,
     HighchartsChartModule,
-    SearchComponent,
     NoWhitespaceDirective
   ]
 })
