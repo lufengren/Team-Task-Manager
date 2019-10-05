@@ -165,7 +165,8 @@ export class TaskhomeComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(updateTaskInfo => {
       if (updateTaskInfo) {
-        this.taskService$.update(updateTaskInfo, task.id).subscribe((updatedTask) => {
+        updateTaskInfo.id = task.id;
+        this.taskService$.update(updateTaskInfo).subscribe((updatedTask) => {
           const index = this.tasks.map(item => item.id).indexOf(updatedTask.id);
           this.tasks = [...this.tasks.slice(0, index), updatedTask, ...this.tasks.slice(index + 1)];
         });

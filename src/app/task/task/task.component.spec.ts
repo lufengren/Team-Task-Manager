@@ -1,11 +1,12 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { TaskComponent } from './task.component';
 import { ShareModule } from '../../share/share.module';
 import { TaskService } from '../../service/task.service';
 import { Task } from '../../domain/task.model';
 import { asyncData } from '../../testing/async-observable-helper';
-import { By } from '@angular/platform-browser';
+
 
 describe('TaskComponent', () => {
   let component: TaskComponent;
