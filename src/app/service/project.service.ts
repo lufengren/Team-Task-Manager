@@ -23,8 +23,7 @@ export class ProjectService {
   add(project: Project): Observable<Project> {
     const uri = `${this.config.uri}/${this.domain}`;
     return this.http.post<Project>(uri, project, { headers: this.headers }).pipe(
-      catchError(this.handleError.handleError)
-    );
+      catchError(this.handleError.handleError));
   }
 
   // update a project,backend check if updated project name exists

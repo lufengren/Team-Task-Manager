@@ -1,6 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { routerAni } from '../../animations/router';
-import { ActivatedRoute } from '@angular/router';
 
 import { CreateprojectComponent } from '../createproject/createproject.component';
 import { DeleteDialogComponent } from '../../core/delete-dialog/delete-dialog.component';
@@ -8,7 +7,7 @@ import { DeleteDialogComponent } from '../../core/delete-dialog/delete-dialog.co
 import { MatDialog } from '@angular/material';
 import { ProjectService } from 'src/app/service/project.service';
 import { Project } from '../../domain/project.model';
-
+import { AzureStorageService } from '../../service/azurestorage/azurestorage.service';
 @Component({
   selector: 'app-projectlist',
   templateUrl: './projectlist.component.html',
@@ -18,7 +17,11 @@ import { Project } from '../../domain/project.model';
 export class ProjectlistComponent implements OnInit {
   // @HostBinding('@routerAni')
   projects: Project[];
-  constructor(private dialog: MatDialog, private service$: ProjectService, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private dialog: MatDialog,
+    private service$: ProjectService,
+    private azureStorageService: AzureStorageService
+  ) { }
 
   ngOnInit() {
     this.getProjects();
@@ -32,9 +35,27 @@ export class ProjectlistComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateprojectComponent);
     dialogRef.afterClosed().subscribe(newProject => {
       if (newProject) {
-        this.service$.add(newProject).subscribe(res => {
-          this.projects = [res, ...this.projects];
+        const fileInfo = newProject.get('coverImg');
+        this.azureStorageService.uploadFile(fileInfo).subscribe(() => {
+          console.log('hit sub');
+          newProject.set('coverImg', fileInfo.name);
+          const formattedNewProject = {
+            name: newProject.get('name'),
+            desc: newProject.get('desc'),
+            coverImg: newProject.get('coverImg')
+          };
+          console.log(formattedNewProject);
+          this.service$.add(formattedNewProject).subscribe(res => {
+            this.projects = [res, ...this.projects];
+          });
         });
+        // .subscribe(() => {
+        //   console.log('hit here');
+        //   newProject.set('coverImg', fileInfo.name);
+        //   this.service$.add(newProject).subscribe(res => {
+        //     this.projects = [res, ...this.projects];
+        //   });
+        // });
       }
     });
   }
@@ -71,6 +92,10 @@ export class ProjectlistComponent implements OnInit {
 
   // openInviteMemberDialog() {
   //   const dialogRef = this.dialog.open(InvitememberComponent);
+  // }
+
+  // createContainer() {
+  //   this.azureStorageService.createContainer().subscribe(res => console.log(res));
   // }
 
 }

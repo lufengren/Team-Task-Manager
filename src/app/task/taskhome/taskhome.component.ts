@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { CreatetaskComponent } from '../createtask/createtask.component';
@@ -21,7 +21,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./taskhome.component.css']
 })
 export class TaskhomeComponent implements OnInit {
-  allLists: Tasklist[];
+  allL statusists: Tasklist[];
   allTasks: Task[];
   tasks: Task[];
   currentTasks: Task[];
@@ -30,7 +30,6 @@ export class TaskhomeComponent implements OnInit {
   currentTasklistId: string;
 
   isHidden = false;
-  @Output() activeTaskItem = new EventEmitter();
   searchTerm: FormControl = new FormControl();
 
   constructor(

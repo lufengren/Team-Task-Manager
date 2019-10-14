@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostBinding, HostListener } from '@angular/core';
 // import { projectCardAni } from '../../animations/projectcard';
 import { Project } from '../../domain/project.model';
+import { AzureStorageService } from '../../service/azurestorage/azurestorage.service';
 
 @Component({
   selector: 'app-project',
@@ -26,10 +27,12 @@ export class ProjectComponent implements OnInit {
   //   this.cardState = 'original';
   // }
 
-  constructor() { }
+  constructor(private azureStorageService: AzureStorageService) { }
 
   ngOnInit() {
-    this.imgUrl = `assets/img/project/${this.project.coverImg}`;
+    this.imgUrl =
+      // tslint:disable-next-line:max-line-length
+      `https://${this.azureStorageService.accountName}.blob.core.windows.net/${this.azureStorageService.containerName}/${this.project.coverImg}`;
   }
   onClick(event: Event) {
     event.stopPropagation();

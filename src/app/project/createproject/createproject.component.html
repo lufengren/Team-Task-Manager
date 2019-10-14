@@ -20,8 +20,12 @@
           formControlName="desc"></textarea>
       </mat-form-field>
     </div>
+    <div class="form-field file">
+      <input type="file" id="fileEle" class="project-img" accept=".jpg, .jpeg, .png" (change)="onFileChange($event)">
+      <label for="fileEle">Choose an image</label>
+    </div>
   </div>
-  <div mat-dialog-actions class="mat-dialog-actins">
+  <div mat-dialog-actions class="mat-dialog-actions">
     <button type="button" mat-raised-button color="primary" type="submit" [disabled]="!formModel.valid">save</button>
     <button type="button" mat-dialog-close mat-button>close</button>
   </div>
