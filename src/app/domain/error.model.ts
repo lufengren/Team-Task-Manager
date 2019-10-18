@@ -1,4 +1,4 @@
-export interface Error {
+export interface IError {
   timestamp?: Date;
   status?: string;
   error?: string;

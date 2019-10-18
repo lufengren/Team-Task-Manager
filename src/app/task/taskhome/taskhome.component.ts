@@ -10,9 +10,7 @@ import { TaskService } from '../../service/task.service';
 import { ProjectService } from '../../service/project.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { Tasklist } from '../../domain/tasklist.model';
-import { Task } from '../../domain/task.model';
-import { Project } from '../../domain/project.model';
+import { ITasklist, ITask, IProject } from '../../domain';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -21,12 +19,12 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./taskhome.component.css']
 })
 export class TaskhomeComponent implements OnInit {
-  allL statusists: Tasklist[];
-  allTasks: Task[];
-  tasks: Task[];
-  currentTasks: Task[];
+  allLists: ITasklist[];
+  allTasks: ITask[];
+  tasks: ITask[];
+  currentTasks: ITask[];
   projectId: string;
-  currentProject: Project;
+  currentProject: IProject;
   currentTasklistId: string;
 
   isHidden = false;
@@ -158,7 +156,7 @@ export class TaskhomeComponent implements OnInit {
       }
     });
   }
-  openEditTaskDialog(task: Task) {
+  openEditTaskDialog(task: ITask) {
     const dialogRef = this.dialog.open(CreatetaskComponent, {
       data: { task: task, tasklists: this.allLists }
     });
@@ -172,9 +170,9 @@ export class TaskhomeComponent implements OnInit {
       }
     });
   }
-  openDeleteTaskDialog(task) {
+  // openDeleteTaskDialog(task) {
 
-  }
+  // }
 
   showSidebar() {
     this.isHidden = !this.isHidden;

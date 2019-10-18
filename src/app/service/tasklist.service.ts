@@ -1,13 +1,13 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Tasklist, Task } from '../domain';
+import { ITasklist, ITask } from '../domain';
 import { Observable, of } from 'rxjs';
 import { concatMap, catchError } from 'rxjs/operators';
 import { HandleError } from './handleError.service';
 
 @Injectable({
-    providedIn: 'root'
-  })
+  providedIn: 'root'
+})
 
 export class TasklistService {
 
@@ -21,7 +21,7 @@ export class TasklistService {
     private handleError: HandleError
   ) { }
 
-  add(tasklist): Observable<Tasklist> {
+  add(tasklist): Observable<ITasklist> {
     const uri = `${this.config.uri}/${this.domain}`;
     // return this.http.get<Tasklist[]>(`${this.config.uri}/projects/${projectId}/tasklists`)
     //   .pipe(concatMap(tasklists => {
@@ -32,40 +32,40 @@ export class TasklistService {
     //       return this.http.post<Tasklist>(uri, JSON.stringify(tasklist), { headers: this.headers });
     //     }
     //   }));
-    return this.http.post<Tasklist>(uri, JSON.stringify(tasklist), { headers: this.headers });
+    return this.http.post<ITasklist>(uri, JSON.stringify(tasklist), { headers: this.headers });
   }
 
-  update(updateInfo, tasklistId, projectId): Observable<Tasklist> {
+  update(updateInfo, tasklistId, projectId): Observable<ITasklist> {
     const uri = `${this.config.uri}/${this.domain}/${tasklistId}`;
-    return this.http.get<Tasklist[]>(`${this.config.uri}/${this.domain}/`, { params: { 'projectId': projectId } })
+    return this.http.get<ITasklist[]>(`${this.config.uri}/${this.domain}/`, { params: { 'projectId': projectId } })
       .pipe(concatMap(tasklists => {
         const filterLists = tasklists.filter(tasklist => tasklist.id !== tasklistId);
         const isExist = filterLists.every(list => list.name !== updateInfo.name);
         if (!isExist) {
           throw 'tasklist exists';
         } else {
-          return this.http.patch<Tasklist>(uri, JSON.stringify(updateInfo), { headers: this.headers });
+          return this.http.patch<ITasklist>(uri, JSON.stringify(updateInfo), { headers: this.headers });
         }
       }));
   }
 
-  getByProjectId(projectId): Observable<Tasklist[]> {
+  getByProjectId(projectId): Observable<ITasklist[]> {
     const uri = `${this.config.uri}/${this.domain}`;
-    return this.http.get<Tasklist[]>(uri, { params: { 'projectId': projectId } });
+    return this.http.get<ITasklist[]>(uri, { params: { 'projectId': projectId } });
   }
-  getById(tasklistId): Observable<Tasklist> {
+  getById(tasklistId): Observable<ITasklist> {
     const uri = `${this.config.uri}/${this.domain}/${tasklistId}`;
-    return this.http.get<Tasklist>(uri);
+    return this.http.get<ITasklist>(uri);
   }
-  delete(id): Observable<Tasklist> {
+  delete(id): Observable<ITasklist> {
     const uri = `${this.config.uri}/${this.domain}/${id}`;
-    this.http.get<Task[]>(`${this.config.uri}/tasks/`, { params: { 'taskListId': id } })
+    this.http.get<ITask[]>(`${this.config.uri}/tasks/`, { params: { 'taskListId': id } })
       .subscribe(tasks => tasks.forEach(task => this.http.delete(`${this.config.uri}/tasks/${task.id}`).subscribe()));
-    return this.http.delete<Tasklist>(uri);
+    return this.http.delete<ITasklist>(uri);
   }
-  get(): Observable<Tasklist[]> {
+  get(): Observable<ITasklist[]> {
     const uri = `${this.config.uri}/${this.domain}`;
-    return this.http.get<Tasklist[]>(uri);
+    return this.http.get<ITasklist[]>(uri);
   }
   getLength(): Observable<number> {
     // const uri = `${this.config.uri}/${this.domain}?count=true`;

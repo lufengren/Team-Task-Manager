@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Tasklist } from '../../domain/tasklist.model';
+import { ITasklist } from '../../domain';
 
 @Component({
   selector: 'app-tasklist',
@@ -7,10 +7,10 @@ import { Tasklist } from '../../domain/tasklist.model';
   styleUrls: ['./tasklist.component.css']
 })
 export class TasklistComponent {
-  @Input() list: Tasklist;
+  @Input() list: ITasklist;
   @Output() emitId = new EventEmitter<string>();
-  @Output() emitEditList = new EventEmitter<Tasklist>();
-  @Output() emitDeleteList = new EventEmitter<Tasklist>();
+  @Output() emitEditList = new EventEmitter<ITasklist>();
+  @Output() emitDeleteList = new EventEmitter<ITasklist>();
 
   constructor() { }
 

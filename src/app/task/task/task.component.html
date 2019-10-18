@@ -1,5 +1,5 @@
 <div class="task-container">
-  <mat-checkbox class="mr-2" color="primary" (click)="stopPropgate(event)" [checked]="task.completed"
+  <mat-checkbox class="mr-2" color="primary" (click)="stopPropgate($event)" [checked]="task.completed"
     (change)="toggleTaskStatus(task)">
   </mat-checkbox>
   <div class="task-detail">

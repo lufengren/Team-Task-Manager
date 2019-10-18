@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateprojectComponent implements OnInit {
   title = '';
-  coverImg = null;
+  coverImg: string;
   formModel: FormGroup = this.fb.group({
     name: ['', Validators.required],
     desc: [''],

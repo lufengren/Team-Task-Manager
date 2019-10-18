@@ -6,7 +6,7 @@ import { DeleteDialogComponent } from '../../core/delete-dialog/delete-dialog.co
 
 import { MatDialog } from '@angular/material';
 import { ProjectService } from 'src/app/service/project.service';
-import { Project } from '../../domain/project.model';
+import { IProject } from '../../domain';
 import { AzureStorageService } from '../../service/azurestorage/azurestorage.service';
 @Component({
   selector: 'app-projectlist',
@@ -16,7 +16,7 @@ import { AzureStorageService } from '../../service/azurestorage/azurestorage.ser
 })
 export class ProjectlistComponent implements OnInit {
   // @HostBinding('@routerAni')
-  projects: Project[];
+  projects: IProject[];
   constructor(
     private dialog: MatDialog,
     private service$: ProjectService,
@@ -60,7 +60,7 @@ export class ProjectlistComponent implements OnInit {
     });
   }
 
-  openEditProjectDialog(project: Project) {
+  openEditProjectDialog(project: IProject) {
     const dialogRef = this.dialog.open(CreateprojectComponent, { data: { project: project } });
     dialogRef.afterClosed().subscribe(updateProject => {
       if (updateProject) {
@@ -79,7 +79,7 @@ export class ProjectlistComponent implements OnInit {
     });
   }
 
-  openDeleteProjectDialog(project: Project) {
+  openDeleteProjectDialog(project: IProject) {
     const dialogRef = this.dialog.open(DeleteDialogComponent,
       { data: { title: 'Delete Project', content: `Delete project "${project.name}" will delete all tasklists and tasks under it` } });
     dialogRef.afterClosed().subscribe(res => {

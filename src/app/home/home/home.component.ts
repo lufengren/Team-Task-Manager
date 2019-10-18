@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
-import SunsetTheme from 'highcharts/themes/sunset';
+// import SunsetTheme from 'highcharts/themes/sunset';
 import { Observable } from 'rxjs';
 import { ProjectService } from '.././../service/project.service';
 import { TasklistService } from '../../service/tasklist.service';
@@ -25,10 +25,10 @@ Highcharts.setOptions({
 })
 
 export class HomeComponent implements OnInit {
-  private numberOfProjects$: Observable<number>;
-  private numberOfTasklists$: Observable<number>;
-  private numberOfTasks$: Observable<number>;
-  private Highcharts = Highcharts;
+  numberOfProjects$: Observable<number>;
+  numberOfTasklists$: Observable<number>;
+  numberOfTasks$: Observable<number>;
+  Highcharts = Highcharts;
   project = {
     title: { text: 'Projects' },
     yAxis: {

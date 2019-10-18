@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../domain';
+import { IUser } from '../domain';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -13,22 +13,22 @@ export class UserService {
   });
 
   constructor(private http: HttpClient, @Inject('BASE_CONFIG') private config) { }
-  searchUsers(filterUsername: string): Observable<User[]> {
+  searchUsers(filterUsername: string): Observable<IUser[]> {
     const uri = `${this.config.uri}/${this.domain}`;
-    return this.http.get<User[]>(uri, { params: { 'email_like': filterUsername } });
+    return this.http.get<IUser[]>(uri, { params: { 'email_like': filterUsername } });
   }
-  getUserByProducts(projectId: string): Observable<User[]> {
+  getUserByProducts(projectId: string): Observable<IUser[]> {
     const uri = `${this.config.uri}/${this.domain}`;
-    return this.http.get<User[]>(uri, { params: { 'projectId': projectId } });
+    return this.http.get<IUser[]>(uri, { params: { 'projectId': projectId } });
   }
-  addProjectRef(user: User, projectId: string): Observable<User> {
+  addProjectRef(user: IUser, projectId: string): Observable<IUser> {
     const uri = `${this.config.uri}/${this.domain}/${user.id}`;
     const projectIds = (user.projectIds) ? user.projectIds : [];
     return this.http
-      .patch<User>(uri, JSON.stringify({ projectIds: [...projectIds, projectId] }), { headers: this.headers })
+      .patch<IUser>(uri, JSON.stringify({ projectIds: [...projectIds, projectId] }), { headers: this.headers });
   }
 
-  removeProjectRef(user: User, projectId: string): Observable<User> {
+  removeProjectRef(user: IUser, projectId: string): Observable<IUser> {
     const uri = `${this.config.uri}/${this.domain}/${user.id}`;
     const projectIds = (user.projectIds) ? user.projectIds : [];
     const index = projectIds.indexOf(projectId);
@@ -37,6 +37,6 @@ export class UserService {
     }
     const toUpdate = [...projectIds.slice(0, index), ...projectIds.slice(index + 1)];
     return this.http
-      .patch<User>(uri, JSON.stringify({ projectIds: toUpdate }), { headers: this.headers });
+      .patch<IUser>(uri, JSON.stringify({ projectIds: toUpdate }), { headers: this.headers });
   }
 }

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Task } from '../../domain/task.model';
+import { ITask } from '../../domain';
 import { TaskService } from '../../service/task.service';
 
 @Component({
@@ -8,9 +8,9 @@ import { TaskService } from '../../service/task.service';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent {
-  @Input() task: Task;
-  @Output() emitEdit = new EventEmitter<Task>();
-  @Output() emitDelete = new EventEmitter<Task>();
+  @Input() task: ITask;
+  @Output() emitEdit = new EventEmitter<ITask>();
+  @Output() emitDelete = new EventEmitter<ITask>();
 
   constructor(private taskService$: TaskService) { }
 
@@ -18,14 +18,14 @@ export class TaskComponent {
     ev.stopPropagation();
   }
 
-  toggleTaskStatus(task: Task) {
+  toggleTaskStatus(task: ITask) {
     task.completed = !task.completed;
     this.taskService$.update(task).subscribe(
       (updatedTask) => {
         this.task.completed = updatedTask.completed;
       });
   }
-  emitEditTask(task: Task) {
+  emitEditTask(task: ITask) {
     this.emitEdit.emit(task);
   }
 }

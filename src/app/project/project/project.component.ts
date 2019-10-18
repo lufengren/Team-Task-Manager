@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostBinding, HostListener } from '@angular/core';
 // import { projectCardAni } from '../../animations/projectcard';
-import { Project } from '../../domain/project.model';
+import { IProject } from '../../domain';
 import { AzureStorageService } from '../../service/azurestorage/azurestorage.service';
 
 @Component({
@@ -10,11 +10,10 @@ import { AzureStorageService } from '../../service/azurestorage/azurestorage.ser
   // animations: [projectCardAni]
 })
 export class ProjectComponent implements OnInit {
-  @Input() project: Project;
-  @Output() oninvite = new EventEmitter<Project>();
-  @Output() onedit = new EventEmitter<Project>();
-  @Output() ondelete = new EventEmitter<Project>();
-  @Output() onview = new EventEmitter<Project>();
+  @Input() project: IProject;
+  @Output() oninvite = new EventEmitter<IProject>();
+  @Output() onedit = new EventEmitter<IProject>();
+  @Output() ondelete = new EventEmitter<IProject>();
   imgUrl: string;
 
   // @HostBinding('@card') cardState = 'original';
@@ -46,3 +45,5 @@ export class ProjectComponent implements OnInit {
   }
 
 }
+
+

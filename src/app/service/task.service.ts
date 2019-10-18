@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Task } from '../domain';
+import { ITask } from '../domain';
 import { Observable, of } from 'rxjs';
 import { HandleError } from './handleError.service';
 
@@ -21,39 +21,39 @@ export class TaskService {
     private handleError: HandleError
   ) { }
 
-  add(task, tasklistId, projectId): Observable<Task> {
+  add(task, tasklistId, projectId): Observable<ITask> {
     const uri = `${this.config.uri}/projects/${projectId}/tasklists/${tasklistId}/${this.domain}`;
-    return this.http.post<Task>(uri, JSON.stringify(task), { headers: this.headers });
+    return this.http.post<ITask>(uri, JSON.stringify(task), { headers: this.headers });
   }
 
-  update(updateInfo: Task): Observable<Task> {
+  update(updateInfo: ITask): Observable<ITask> {
     const uri = `${this.config.uri}/${this.domain}/${updateInfo.id}`;
-    return this.http.put<Task>(uri, updateInfo, { headers: this.headers });
+    return this.http.put<ITask>(uri, updateInfo, { headers: this.headers });
   }
 
-  delete(task: Task): Observable<Task> {
+  delete(task: ITask): Observable<ITask> {
     const uri = `${this.config.uri}/${this.domain}/${task.id}`;
-    return this.http.delete<Task>(uri);
+    return this.http.delete<ITask>(uri);
   }
 
-  getByListId(listId): Observable<Task[]> {
+  getByListId(listId): Observable<ITask[]> {
     const uri = `${this.config.uri}/${this.domain}`;
-    return this.http.get<Task[]>(uri, { params: { 'taskListId': listId } });
+    return this.http.get<ITask[]>(uri, { params: { 'taskListId': listId } });
   }
 
-  getByProjectId(projectId): Observable<Task[]> {
+  getByProjectId(projectId): Observable<ITask[]> {
     const uri = `${this.config.uri}/${this.domain}`;
-    return this.http.get<Task[]>(uri, { params: { 'projectId': projectId } });
+    return this.http.get<ITask[]>(uri, { params: { 'projectId': projectId } });
   }
 
-  get(): Observable<Task[]> {
+  get(): Observable<ITask[]> {
     const uri = `${this.config.uri}/${this.domain}`;
-    return this.http.get<Task[]>(uri);
+    return this.http.get<ITask[]>(uri);
   }
 
-  getByDate(start, end): Observable<Task[]> {
+  getByDate(start, end): Observable<ITask[]> {
     const uri = `${this.config.uri}/${this.domain}?endDate_gte=${start}&endDate_lte=${end}`;
-    return this.http.get<Task[]>(uri);
+    return this.http.get<ITask[]>(uri);
   }
   getLength(): Observable<number> {
     // const uri = `${this.config.uri}/${this.domain}?count=true`;

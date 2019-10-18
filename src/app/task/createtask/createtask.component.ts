@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Tasklist } from '../../domain/tasklist.model';
+import { ITasklist } from '../../domain';
 
 @Component({
   selector: 'app-createtask',
@@ -10,7 +10,7 @@ import { Tasklist } from '../../domain/tasklist.model';
 })
 export class CreatetaskComponent implements OnInit {
   title: string;
-  tasklists: Tasklist[] = this.data.tasklists;
+  tasklists: ITasklist[] = this.data.tasklists;
   currentTasklist: string;
   priorities = [
     {

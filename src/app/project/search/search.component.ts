@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ProjectService } from '../../service/project.service';
 import { Subject, Observable } from 'rxjs';
-import { Project } from '../../domain/project.model';
+import { IProject } from '../../domain';
 
 @Component({
   selector: 'app-search',
@@ -11,7 +11,7 @@ import { Project } from '../../domain/project.model';
 })
 export class SearchComponent implements OnInit {
   private searchTerms = new Subject<string>();
-  results$: Observable<Project[]>;
+  results$: Observable<IProject[]>;
   constructor(private projectService: ProjectService) { }
 
   search(term: string): void {

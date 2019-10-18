@@ -1,9 +1,9 @@
-import { User } from './user.model';
-import { Error } from './error.model';
+import { IUser } from './user.model';
+import { IError } from './error.model';
 
-export interface Auth {
-  user?: User;
+export interface IAuth {
+  user?: IUser;
   userId?: string;
   token?: string;
-  err?: Error;
+  err?: IError;
 }
